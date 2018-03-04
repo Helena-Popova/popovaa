@@ -2,8 +2,8 @@ package ru.job4j;
 
 /**
  *Class Calculate решение задачи части 001 урок 1.
- *@author Popova
- *@since 01.03.2018
+ *@author Popova.
+ *@since 01.03.2018.
 */
 public class Calculate {
 	/**

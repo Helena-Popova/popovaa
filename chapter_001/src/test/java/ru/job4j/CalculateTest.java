@@ -9,9 +9,9 @@ import static org.junit.Assert.assertThat;
 /**
 * Test.
 *
-* @author Popova Alena (helezpopova@gmail.com)
-* @version $Id$
-* @since 0.1
+* @author Popova Alena (helezpopova@gmail.com).
+* @version $Id$.
+* @since 0.1.
 */
 public class CalculateTest {
 	/**
