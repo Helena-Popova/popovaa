@@ -13,4 +13,10 @@ public class MaxTest {
         assertThat(couple_numbers.max(1,2), is(2));
     }
 
+    @Test
+    public void whenThirdMoreThanAll() {
+        Max couple_numbers = new Max();
+        assertThat(couple_numbers.max(1,2,3), is(3));
+    }
+
 }

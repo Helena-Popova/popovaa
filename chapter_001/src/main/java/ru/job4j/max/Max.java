@@ -19,4 +19,16 @@ public class Max {
         return firstValue > secondValue ? firstValue : secondValue;
     }
 
+    /**
+     *
+     * @param firstValue
+     * @param secondValue
+     * @param therdValue
+     * @return max of three values
+     */
+    public int max(int firstValue, int secondValue, int therdValue) {
+        int temp = this.max(firstValue,secondValue);
+        return this.max(temp,therdValue);
+    }
+
 }
