@@ -8,13 +8,18 @@ package ru.job4j.calculator;
  */
 public  class Converter {
     /**
+     * закрытые поля для  EuroRate и DollarRate
+     */
+    private final int EURO_RATE = 70;
+    private final int DOLLAR_RATE = 60;
+    /**
      * Конвертируем рубли в евро.
      * @param value рубли.
      * @return Евро.
      */
     public double rubleToEuro(int value) {
         Calculator some_value = new Calculator();
-        some_value.div(value , 70 );
+        some_value.div(value , EURO_RATE );
         return some_value.getResult();
     }
 
@@ -25,7 +30,7 @@ public  class Converter {
      */
     public double rubleToDollar(int value) {
         Calculator some_value = new Calculator();
-        some_value.div(value , 60 );
+        some_value.div(value , DOLLAR_RATE );
         return some_value.getResult();
     }
 
@@ -36,7 +41,7 @@ public  class Converter {
      */
     public double dollarToRubles(int value) {
         Calculator some_value = new Calculator();
-        some_value.multiple(value , 60 );
+        some_value.multiple(value , DOLLAR_RATE );
         return some_value.getResult();
     }
 
@@ -47,7 +52,7 @@ public  class Converter {
      */
     public double euroToRubles(int value) {
         Calculator some_value = new Calculator();
-        some_value.multiple(value , 70 );
+        some_value.multiple(value , EURO_RATE );
         return some_value.getResult();
     }
 
