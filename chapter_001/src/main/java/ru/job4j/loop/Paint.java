@@ -2,6 +2,9 @@ package ru.job4j.loop;
 
 /**
  * Class for drawing pyramids
+ * @author Helena
+ * @version 1.0
+ * @since 09.03.18
  */
 
 public class Paint {
@@ -9,7 +12,7 @@ public class Paint {
     /**
      * method for drawing pyramids
      * @param height
-     * @return
+     * @return pyramid
      */
 
     public String pyramid(int height) {
@@ -30,7 +33,7 @@ public class Paint {
     /**
      * method for drawing pyramids
      * @param height
-     * @return
+     * @return pyramid
      */
     public String simplePiramid(int height){
         StringBuilder screen = new StringBuilder();

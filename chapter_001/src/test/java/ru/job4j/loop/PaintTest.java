@@ -6,9 +6,9 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 /**
- * @author Petr Arsentev (parsentev@yandex.ru)
- * @version $Id$
- * @since 0.1
+ * @author Helena
+ * @version 1.0
+ * @since 09.03.18
  */
 public class PaintTest {
     @Test
