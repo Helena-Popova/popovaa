@@ -42,9 +42,7 @@ public class Point {
      * @return double distanse
      */
     public double distanseTo(Point that_point) {
-        double chapterOne = Math.pow(that_point.x - this.x,2);
-        double chapterTwo = Math.pow(that_point.y - this.y,2);
-        return Math.sqrt(chapterOne + chapterTwo);
+        return Math.sqrt(Math.pow(that_point.x - this.x,2) + Math.pow(that_point.y - this.y,2));
     }
 
     /**
