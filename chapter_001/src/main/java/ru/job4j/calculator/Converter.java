@@ -8,10 +8,10 @@ package ru.job4j.calculator;
  */
 public  class Converter {
     /**
-     * закрытые поля для  EuroRate и DollarRate
+     *  поля для  EuroRate и DollarRate
      */
-    private final int EURO_RATE = 70;
-    private final int DOLLAR_RATE = 60;
+    public static final int EURO_RATE = 70;
+    public static final int DOLLAR_RATE = 60;
     /**
      * Конвертируем рубли в евро.
      * @param value рубли.
