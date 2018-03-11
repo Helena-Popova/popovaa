@@ -10,24 +10,24 @@ public class Max {
 
     /**
      *Method for calculate .
-     *@param firstValue
-     *@param secondValue
+     *@param first
+     *@param second
      * are numders for compare.
      *@result max value
      */
-    public int max(int firstValue, int secondValue) {
-        return firstValue > secondValue ? firstValue : secondValue;
+    public int max(int first, int second) {
+        return first > second ? first : second;
     }
 
     /**
      *
-     * @param firstValue
-     * @param secondValue
-     * @param therdValue
+     * @param first
+     * @param second
+     * @param therd
      * @return max of three values
      */
-    public int max(int firstValue, int secondValue, int therdValue) {
-        return this.max(this.max(firstValue,secondValue),therdValue);
+    public int max(int first, int second, int therd) {
+        return this.max(this.max(first, second), therd);
     }
 
 }

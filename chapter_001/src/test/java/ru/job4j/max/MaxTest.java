@@ -9,14 +9,14 @@ public class MaxTest {
 
     @Test
     public void whenFirstLessSecond() {
-        Max couple_numbers = new Max();
-        assertThat(couple_numbers.max(1,2), is(2));
+        Max coupleNumbers = new Max();
+        assertThat(coupleNumbers.max(1, 2), is(2));
     }
 
     @Test
     public void whenThirdMoreThanAll() {
-        Max couple_numbers = new Max();
-        assertThat(couple_numbers.max(1,2,3), is(3));
+        Max coupleNumbers = new Max();
+        assertThat(coupleNumbers.max(1, 2, 3), is(3));
     }
 
 }
