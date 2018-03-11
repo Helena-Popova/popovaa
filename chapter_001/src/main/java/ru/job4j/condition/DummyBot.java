@@ -16,9 +16,9 @@ public class DummyBot {
     public String answer(String questions) {
         String strFromBot = "Это ставит меня в тупик. Спросите другой вопрос.";
 
-        if (questions.equals("Привет, Бот")){
+        if (questions.equals("Привет, Бот")) {
             strFromBot = "Привет, умник.";
-        } else if(questions.equals("Как звать первого президета Америки?")){
+        } else if (questions.equals("Как звать первого президета Америки?")) {
             strFromBot = "Джордж Вашингтон";
         }
 

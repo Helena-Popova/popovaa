@@ -8,16 +8,16 @@ package ru.job4j.calculator;
  */
 public class Fit {
 
-    public static final double I_W_RATIO = 1.15;
-    public static final double I_W_COEF_MEN = 100;
-    public static final double I_W_COEF_WMEN = 110;
+    public static final double IWRATIO = 1.15;
+    public static final double COEFMEN = 100;
+    public static final double COEFWMEN = 110;
     /**
      * Идеальный вес для мужчины.
      * @param height Рост.
      * @return идеальный вес.
      */
     double manWeight(double height) {
-        return (height - I_W_COEF_MEN)*I_W_RATIO;
+        return (height - COEFMEN) * IWRATIO;
     }
 
     /**
@@ -26,6 +26,6 @@ public class Fit {
      * @return идеальный вес.
      */
     double womanWeight(double height) {
-        return (height - I_W_COEF_WMEN)*I_W_RATIO;
+        return (height - COEFWMEN) * IWRATIO;
     }
 }

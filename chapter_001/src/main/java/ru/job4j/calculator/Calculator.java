@@ -7,7 +7,7 @@ package ru.job4j.calculator;
  * @since 0.1
  */
 
-public class Calculator{
+public class Calculator {
 	/**
 	 * поле внутреней переменной
 	 */
@@ -37,7 +37,7 @@ public class Calculator{
 	 * @param second
 	 */
 	public void div(double first, double second) {
-		this.result = first/second;
+		this.result = first / second;
 	}
 
 	/**
