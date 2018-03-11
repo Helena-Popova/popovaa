@@ -10,15 +10,15 @@ package ru.job4j.loop;
 public class Factorial {
 
     /**
-     * Method calculate
+     * Method calculate.
      * @param n
-     * @return resultCalculate of Factorial
+     * @return result calculate of Factorial
      */
-    public int calc(int n){
-        int resultCalculate = 1;
-        while(n > 1){
-            resultCalculate *= n--;
+    public int calc(int n) {
+        int result = 1;
+        while (n > 1) {
+            result *= n--;
         }
-        return resultCalculate;
+        return result;
     }
 }
