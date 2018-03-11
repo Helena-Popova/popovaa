@@ -17,8 +17,8 @@ public class ArrayChar {
 		boolean result = true;
 		
 		char[] value = prifix.toCharArray();
-		for (int index = 0; index < prifix.length(); index++){
-			if(this.data[index] != value[index]){
+		for (int index = 0; index < prifix.length(); index++) {
+			if (this.data[index] != value[index]) {
 				result = false;
 			}
 		}

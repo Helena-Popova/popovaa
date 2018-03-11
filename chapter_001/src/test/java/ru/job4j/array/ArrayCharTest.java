@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class ArrayCharTest {
 
     @Test
-    public void whenStartWithPrefixThanTrue(){
+    public void whenStartWithPrefixThanTrue() {
         ArrayChar myString = new ArrayChar("Hellouuuuu");
         boolean result = myString.startWith("Hell");
         assertThat(result, is(true));
@@ -16,7 +16,7 @@ public class ArrayCharTest {
     }
 
     @Test
-    public void whenStartWithoutPrefixThanFalse(){
+    public void whenStartWithoutPrefixThanFalse() {
         ArrayChar myString = new ArrayChar("Hellouuuuu");
         boolean result = myString.startWith("Helo");
         assertThat(result, is(false));
