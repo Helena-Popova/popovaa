@@ -18,12 +18,12 @@ public class Counter {
      */
     public int add(int start, int finish) {
         int summ = 0;
-        int counterValaitiv = start;
-        while(counterValaitiv <= finish) {
-            if (counterValaitiv % 2 == 0) {
-                summ += counterValaitiv;
+        int counter = start;
+        while (counter <= finish) {
+            if (counter % 2 == 0) {
+                summ += counter;
             }
-            counterValaitiv++;
+            counter++;
         }
         return summ;
     }

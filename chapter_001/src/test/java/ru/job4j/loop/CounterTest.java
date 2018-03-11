@@ -9,6 +9,6 @@ public class CounterTest {
     @Test
     public void isItRightSumm() {
         Counter mySumm = new Counter();
-        assertThat(mySumm.add(1,10), is(30));
+        assertThat(mySumm.add(1, 10), is(30));
     }
 }
