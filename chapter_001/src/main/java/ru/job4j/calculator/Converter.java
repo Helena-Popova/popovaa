@@ -10,17 +10,17 @@ public  class Converter {
     /**
      *  поля для  EuroRate и DollarRate
      */
-    public static final int EURO_RATE = 70;
-    public static final int DOLLAR_RATE = 60;
+    public static final int EURO = 70;
+    public static final int DOLLAR = 60;
     /**
      * Конвертируем рубли в евро.
      * @param value рубли.
      * @return Евро.
      */
     public double rubleToEuro(int value) {
-        Calculator some_value = new Calculator();
-        some_value.div(value , EURO_RATE );
-        return some_value.getResult();
+        Calculator someValue = new Calculator();
+        someValue.div(value, EURO);
+        return someValue.getResult();
     }
 
     /**
@@ -29,9 +29,9 @@ public  class Converter {
      * @return Доллоры
      */
     public double rubleToDollar(int value) {
-        Calculator some_value = new Calculator();
-        some_value.div(value , DOLLAR_RATE );
-        return some_value.getResult();
+        Calculator someValue = new Calculator();
+        someValue.div(value, DOLLAR);
+        return someValue.getResult();
     }
 
     /**
@@ -40,9 +40,9 @@ public  class Converter {
      * @return Рубли
      */
     public double dollarToRubles(int value) {
-        Calculator some_value = new Calculator();
-        some_value.multiple(value , DOLLAR_RATE );
-        return some_value.getResult();
+        Calculator someValue = new Calculator();
+        someValue.multiple(value, DOLLAR);
+        return someValue.getResult();
     }
 
     /**
@@ -51,9 +51,9 @@ public  class Converter {
      * @return Рубли
      */
     public double euroToRubles(int value) {
-        Calculator some_value = new Calculator();
-        some_value.multiple(value , EURO_RATE );
-        return some_value.getResult();
+        Calculator someValue = new Calculator();
+        someValue.multiple(value, EURO);
+        return someValue.getResult();
     }
 
 }
