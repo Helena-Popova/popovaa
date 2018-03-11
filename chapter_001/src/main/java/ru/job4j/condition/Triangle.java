@@ -15,7 +15,7 @@ public class Triangle {
     private Point b;
     private Point c;
 
-    public Triangle(Point a, Point b, Point c){
+    public Triangle(Point a, Point b, Point c) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -29,13 +29,12 @@ public class Triangle {
      * @return Перимент.
      */
     public double period(double ab, double ac, double bc) {
-        return (ab + ac + bc)/2;
+        return (ab + ac + bc) / 2;
     }
 
 
     /**
      * Calculate area of trinagle.
-     *
      * @return area or -1
      */
     public double area() {
@@ -45,20 +44,19 @@ public class Triangle {
         double bc = this.b.distanseTo(this.c);
         double p = this.period(ab, ac, bc);
         if (this.exist(ab, ac, bc)) {
-            rsl = Math.sqrt(p*(p-ab)*(p-ac)*(p-bc));
+            rsl = Math.sqrt(p * (p - ab) * (p - ac) * (p - bc));
         }
         return rsl;
     }
 
     /**
      * Method check -  May triangle exist or not.
-     *
      * @param ab distanse between a and b
      * @param ac distanse between a and c
      * @param bc distanse between b and c
      * @return Triangle may exist or not
      */
     private boolean exist(double ab, double ac, double bc) {
-        return ((ab+ac > bc) && (ac+ bc > ab) && (bc+ab > ac));
+        return ((ab + ac > bc) && (ac + bc > ab) && (bc + ab > ac));
     }
 }
