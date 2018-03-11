@@ -38,11 +38,11 @@ public class Point {
     /**
      * метод distanseTo.
      * рассчитывает дистанцию до точки.
-     * @param that_point
+     * @param thatPoint
      * @return double distanse
      */
-    public double distanseTo(Point that_point) {
-        return Math.sqrt(Math.pow(that_point.x - this.x,2) + Math.pow(that_point.y - this.y,2));
+    public double distanseTo(Point thatPoint) {
+        return Math.sqrt(Math.pow(thatPoint.x - this.x, 2) + Math.pow(thatPoint.y - this.y, 2));
     }
 
     /**
@@ -50,8 +50,8 @@ public class Point {
      * @param args
      */
     public static void main(String[] args) {
-        Point a = new Point(2,3);
-        Point b = new Point(5,6);
+        Point a = new Point(2, 3);
+        Point b = new Point(5, 6);
         a.showCoordinates(b);
         System.out.println(a.distanseTo(b));
     }
