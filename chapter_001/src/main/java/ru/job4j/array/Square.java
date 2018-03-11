@@ -10,11 +10,11 @@ public class Square {
 	
 /**
 */
-	public int[] calculate(int bound){
-		int[] rslt = new int[bound];
-		for(int i = 0; i < rslt.length; i++){
-			rslt[i] = i*i;
+	public int[] calculate(int bound) {
+		int[] result = new int[bound];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = i * i;
 		}
-		return rslt;
+		return result;
 	}
 }
