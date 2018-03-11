@@ -15,13 +15,13 @@ public class ArrayDuplicate {
 	 */
 	public String[] remove(String[] array) {
 		
-		int repeatCounter = array.length-1;
-			for(int index = 0; index < array.length; index++){
+		int repeatCounter = array.length - 1;
+			for (int index = 0; index < array.length; index++) {
 				String temp = array[index];
-				for (int indexCompare = index+1; indexCompare < repeatCounter;){
-					if (temp.equals(array[indexCompare])){
+				for (int indexCompare = index + 1; indexCompare < repeatCounter;) {
+					if (temp.equals(array[indexCompare])) {
 						array[indexCompare] = array[repeatCounter];
-						repeatCounter --;
+						repeatCounter--;
 					}
 					else {
 						indexCompare++;
@@ -29,6 +29,6 @@ public class ArrayDuplicate {
 					
 				}
 			}
-			return Arrays.copyOf(array,repeatCounter);
+			return Arrays.copyOf(array, repeatCounter);
 	}
 }
