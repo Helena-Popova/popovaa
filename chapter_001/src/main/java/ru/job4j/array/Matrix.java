@@ -19,13 +19,7 @@ public class Matrix {
 		int[][] myMatrix = new int[size + 1][size + 1];
 		for (int row = 0; row < size + 1; row++) {
 			for (int column = 0; column < size + 1; column++) {
-				myMatrix[row][column] = row * column;
-				if (row == 0) {
-					myMatrix[row][column] = column;
-				}
-				if (column == 0) {
-					myMatrix[row][column] = row;
-				}
+				myMatrix[row][column] = (row == 0 || column == 0) ? column + row : row * column;
 			}
 		}
 		return myMatrix;
