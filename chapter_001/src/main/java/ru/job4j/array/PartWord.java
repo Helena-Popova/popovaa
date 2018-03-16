@@ -19,18 +19,18 @@ public class PartWord {
 
         char[] data = origin.toCharArray();
         char[] part = sub.toCharArray();
-        int a = 0;
+        int counter = 0;
 
         for (int index = 0; index < origin.length(); index++) {
-                if (data[index] == part[a]) {
-                    a++;
-                    if (a == sub.length() - 1) {
+                if (data[index] == part[counter]) {
+                    counter++;
+                    if (counter == sub.length() - 1) {
                         return true;
                     }
                 }
-                else if (a != 0) {
+                else if (counter != 0) {
                     index--;
-                    a = 0;
+                    counter = 0;
                 }
         }
         return  false;
