@@ -24,12 +24,4 @@ public class FindLoopTest {
         assertThat(result, is(-1));
     }
 
-    @Test
-    public void whenFindNullButIndexWrong() {
-        int[] myMassif = {3, 23, 24, 45, 56, 46};
-        FindLoop someFindAlgotitm = new FindLoop();
-        int result = someFindAlgotitm.indexOf(myMassif, 0);
-        assertThat(result, is(0));
-    }
-
 }

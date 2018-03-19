@@ -15,10 +15,10 @@ public class Matrix {
 	 */
 	
 	public int[][] multiple(int size) {
-		
-		int[][] myMatrix = new int[size + 1][size + 1];
-		for (int row = 0; row < size + 1; row++) {
-			for (int column = 0; column < size + 1; column++) {
+		size = size + 1;
+		int[][] myMatrix = new int[size][size];
+		for (int row = 0; row < size; row++) {
+			for (int column = 0; column < size; column++) {
 				myMatrix[row][column] = (row == 0 || column == 0) ? column + row : row * column;
 			}
 		}

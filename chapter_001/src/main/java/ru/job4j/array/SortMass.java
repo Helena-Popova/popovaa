@@ -16,11 +16,10 @@ public class SortMass {
         int a = 0;
         int i = 0;
 
-        for ( int counter = 0; counter < massSort.length; counter++){
-            if (i==massSecond.length || a < massFirst.length && massFirst[a] < massSecond[i] ) {
+        for (int counter = 0; counter < massSort.length; counter++) {
+            if (!(i < massSecond.length) || a < massFirst.length && massFirst[a] < massSecond[i]) {
                 massSort[counter] = massFirst[a++];
-            }
-            else {
+            } else {
                 massSort[counter] = massSecond[i++];
             }
         }

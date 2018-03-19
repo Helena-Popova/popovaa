@@ -27,8 +27,7 @@ public class PartWord {
                     if (counter == sub.length() - 1) {
                         return true;
                     }
-                }
-                else if (counter != 0) {
+                } else if (counter != 0) {
                     index--;
                     counter = 0;
                 }

@@ -22,11 +22,9 @@ public class ArrayDuplicate {
 					if (temp.equals(array[indexCompare])) {
 						array[indexCompare] = array[repeatCounter];
 						repeatCounter--;
-					}
-					else {
+					} else {
 						indexCompare++;
 					}
-					
 				}
 			}
 			return Arrays.copyOf(array, repeatCounter);
