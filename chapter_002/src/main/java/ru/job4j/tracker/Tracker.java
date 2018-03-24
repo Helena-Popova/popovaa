@@ -94,11 +94,11 @@ public class Tracker {
 		itemsCopy[0]  = Item.EMPTY;
 		int cCopy = 0;
 		for (int i = 0; i < count; i++) {
-			if(this.items[i].getName(). equals(key)){
+			if (this.items[i].getName().equals(key)) {
 				System.arraycopy(this.items, i, itemsCopy, cCopy++, 1);
 			}
 		}
-		return cCopy > 0 ? Arrays.copyOf(itemsCopy,cCopy) : Arrays.copyOf(itemsCopy,1);
+		return cCopy > 0 ? Arrays.copyOf(itemsCopy, cCopy) : Arrays.copyOf(itemsCopy, 1);
 	}
 
 	/**
