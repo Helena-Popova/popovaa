@@ -1,7 +1,7 @@
 package ru.job4j.tracker;
 import java.util.*;
 
-public class Tracker extends Item {
+public class Tracker {
 	
 	private int count = 0;
 	private Item[] items = new Item[100];
