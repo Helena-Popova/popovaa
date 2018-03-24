@@ -1,18 +1,38 @@
 package ru.job4j.tracker;
 import java.util.*;
 
+/**
+ *@author Helena
+ *@version 1.0
+ */
 public class Tracker {
-	
+
+	/**
+	 * Текущее число заявок
+	 */
 	private int count = 0;
+
+	/**
+	 * Массив для хранения заявок
+	 */
 	private Item[] items = new Item[100];
 	private static final Random RM = new Random();
-	
+
+	/**
+	 * Довабляет заявку в список.
+	 * @param item
+	 * @return Item
+	 */
 	public Item add(Item item) {
 		item.setId(this.generateId());
 		items[count++] = item;
 		return item;
 	}
-	
+
+	/**
+	 * Генерирует случайное id для заявки
+	 * @return String new id
+	 */
 	static String generateId() {
 		return String.valueOf(System.currentTimeMillis() + RM.nextInt());
 	}
@@ -80,7 +100,12 @@ public class Tracker {
 		}
 		return cCopy > 0 ? Arrays.copyOf(itemsCopy,cCopy) : Arrays.copyOf(itemsCopy,1);
 	}
-	
+
+	/**
+	 * Находит первое попавшееся значение по id
+	 * @param id
+	 * @return Item
+	 */
 	protected Item findById(String id) {
 		Item findItem = Item.EMPTY; 
 		for (Item offer : items) {
@@ -92,11 +117,19 @@ public class Tracker {
 		
 		return findItem;
 	}
-	
+
+	/**
+	 * Возвращает все значения списка
+	 * @return Item[]
+	 */
 	public Item[] getAll() {
 		return Arrays.copyOf(this.items, count);
 	}
 
+	/**
+	 * Возвращает колличество элементов в списке
+	 * @return int Count
+	 */
 	public int getCount() {
 		return this.count;
 	}
