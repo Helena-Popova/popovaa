@@ -109,7 +109,7 @@ public class Tracker {
 	protected Item findById(String id) {
 		Item findItem = Item.EMPTY; 
 		for (Item offer : items) {
-			if (offer != Item.EMPTY && offer.getId().equals(id)) {
+			if (offer != null && offer.getId().equals(id)) {
 				findItem = offer;
 				break;
 			}

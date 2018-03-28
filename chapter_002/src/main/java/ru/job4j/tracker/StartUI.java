@@ -32,7 +32,15 @@ public class StartUI {
      */
     private final Tracker tracker;
 
-
+    /**
+     * Конструктор для класса
+     *@param inpuT //ввод данных.
+     * @param inpuT
+     */
+    public StartUI(Input inpuT) {
+        this.input = inpuT;
+        this.tracker = new Tracker();
+    }
     /**
      * Конструктор для класса
      *@param inpuT //ввод данных.
@@ -47,26 +55,13 @@ public class StartUI {
      * Главный цикл программы
      */
     public void init() {
-        boolean exit = false;
-        while (!exit) {
-            this.showMenu();
-            String answer = this.input.ask("\n Введите пункт меню : ");
-            if (ADD.equals(answer)) {
-                this.createItem();
-            } else if (SHOW.equals(answer)) {
-                this.showAllItems();
-            } else if (EDIT.equals(answer)) {
-                this.editItem();
-            } else if (DELETE.equals(answer)) {
-                this.deleteItems();
-            } else if (FIND_ID.equals(answer)) {
-                this.findItemById();
-            } else if (FIND_NAME.equals(answer)) {
-                this.findItemByName();
-            } else if (EXIT.equals(answer)) {
-                exit = true;
-            }
-        }
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        menu.fillAction();
+        do {
+            menu.show();
+            int key = Integer.valueOf(input.ask("Please, enter the key : "));
+            menu.select(key);
+            } while (!"Y".equals(this.input.ask("Do you want to exit?( Y ) ")));
 
     }
 
@@ -192,7 +187,8 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        Input input = new ConsoleInput();
+        new StartUI(input).init();
     }
 
 }
