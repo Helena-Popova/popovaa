@@ -59,8 +59,7 @@ public class StartUI {
         menu.fillAction();
         do {
             menu.show();
-            int key = Integer.valueOf(input.ask("Please, enter the key : "));
-            menu.select(key);
+            menu.select(input.ask("Please, enter the key : ", menu.getRange()));
             } while (!"Y".equals(this.input.ask("Do you want to exit?( Y ) ")));
 
     }
@@ -187,7 +186,7 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         new StartUI(input).init();
     }
 

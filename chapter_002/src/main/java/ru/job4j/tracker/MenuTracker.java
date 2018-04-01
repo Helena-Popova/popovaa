@@ -27,6 +27,14 @@ public class MenuTracker {
         this.actions[5] = new MenuTracker.FindItemsByName();
     }
 
+    public int[] getRange() {
+        int[] range = new int[this.actions.length];
+        for (int i = 0; i < this.actions.length; i++) {
+            range[i] = this.actions[i].key();
+            }
+        return range;
+    }
+
     /**
      * выбор действия по введеному ключу
      * @param key
@@ -40,7 +48,7 @@ public class MenuTracker {
      */
     public void show() {
         for (UserAction action : actions) {
-            if(action != null) {
+            if (action != null) {
                 System.out.println(action.info());
             }
         }
@@ -54,7 +62,7 @@ public class MenuTracker {
             return 0;
         }
 
-        public void execute(Input input,Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             String name = input.ask("Please, enter  the task name : ");
             String desc = input.ask("Please, enter  the description :  ");
             Item item = new Item(name, desc);
@@ -74,9 +82,9 @@ public class MenuTracker {
             return 1;
         }
 
-        public void execute(Input input,Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             for (Item item : tracker.getAll()) {
-                System.out.println("id : " + item.getId() + " Name : " + item.getName() + " Description: "+ item.getDescription());
+                System.out.println("id : " + item.getId() + " Name : " + item.getName() + " Description: " + item.getDescription());
             }
         }
 
@@ -90,7 +98,7 @@ public class MenuTracker {
             return 2;
         }
 
-        public void execute(Input input,Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, enter the task id which you want to replace : ");
             if (!tracker.findById(id).getName().equals("")) {
                 String name = input.ask("Please, enter  the new task name : ");
@@ -116,7 +124,7 @@ public class MenuTracker {
             return 3;
         }
 
-        public void execute(Input input,Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, enter  the id Item those you want delete : ");
             if (tracker.findById(id).getId() != null) {
                 tracker.delete(id);
@@ -139,11 +147,11 @@ public class MenuTracker {
             return 4;
         }
 
-        public void execute(Input input,Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, enter  the id Item those you want find : ");
             if (tracker.findById(id).getId() != null) {
                 Item temp = tracker.findById(id);
-                System.out.println("id : " + temp.getId() + " Name : " + temp.getName() + " Description: "+ temp.getDescription());
+                System.out.println("id : " + temp.getId() + " Name : " + temp.getName() + " Description: " + temp.getDescription());
             } else {
                 System.out.println(" items is not existed with this id");
             }
@@ -162,12 +170,12 @@ public class MenuTracker {
             return 5;
         }
 
-        public void execute(Input input,Tracker tracker) {
+        public void execute(Input input, Tracker tracker) {
             String name = input.ask("Please, enter  the name Item those you want find : ");
             if (tracker.findByName(name)[0].getId() != null) {
                 System.out.println("I find! : ");
                 for (Item task : tracker.findByName(name)) {
-                    System.out.println("id : " + task.getId() + " Name : " + task.getName() + " Description: "+ task.getDescription());
+                    System.out.println("id : " + task.getId() + " Name : " + task.getName() + " Description: " + task.getDescription());
                 }
             } else {
                 System.out.println("I don't find");
