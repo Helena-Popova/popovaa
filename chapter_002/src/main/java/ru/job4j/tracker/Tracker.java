@@ -106,7 +106,7 @@ public class Tracker {
 	 * @param id
 	 * @return Item
 	 */
-	protected Item findById(String id) {
+	public Item findById(String id) {
 		Item findItem = Item.EMPTY; 
 		for (Item offer : items) {
 			if (offer != null && offer.getId().equals(id)) {
@@ -132,5 +132,14 @@ public class Tracker {
 	 */
 	public int getCount() {
 		return this.count;
+	}
+
+	/**
+	 * Выход из программы
+	 */
+	public void exit() {
+
+		System.out.println("Вы вышли");
+		System.exit(0);
 	}
 }

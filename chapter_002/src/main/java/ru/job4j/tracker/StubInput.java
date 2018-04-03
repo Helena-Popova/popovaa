@@ -13,7 +13,7 @@ public class StubInput implements Input {
     }
 
     public int ask(String question, int[] range) {
-        int key = Integer.valueOf(this.ask(question));
+        int key = Integer.valueOf(this.ask(""));
         boolean exist = false;
         for (int i : range) {
             if (i == key) {
