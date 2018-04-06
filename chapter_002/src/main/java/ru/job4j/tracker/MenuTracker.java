@@ -69,7 +69,7 @@ public class MenuTracker {
     class AddItem extends BaseAction {
 
         private AddItem(String info, int key) {
-            super(info,key);
+            super(info, key);
 
         }
         @Override
@@ -84,7 +84,7 @@ public class MenuTracker {
 
     private static  class ShowItem extends BaseAction {
         private ShowItem(String info, int key) {
-            super(info,key);
+            super(info, key);
         }
 
         @Override
@@ -106,7 +106,7 @@ public class MenuTracker {
     class EditItem extends BaseAction {
 
         private EditItem(String info, int key) {
-            super(info,key);
+            super(info, key);
         }
 
         @Override
@@ -126,10 +126,10 @@ public class MenuTracker {
     }
 
 
-    private static class DeleteItem extends BaseAction{
+    private static class DeleteItem extends BaseAction {
 
         private DeleteItem(String info, int key) {
-            super(info,key);
+            super(info, key);
         }
 
         @Override
@@ -147,7 +147,7 @@ public class MenuTracker {
     class FindItemById extends BaseAction {
 
         private FindItemById(String info, int key) {
-            super(info,key);
+            super(info, key);
         }
 
         @Override
@@ -155,7 +155,7 @@ public class MenuTracker {
             String id = input.ask("Please, enter  the id Item those you want find : ");
             if (tracker.findById(id) != null) {
                 Item temp = tracker.findById(id);
-                System.out.println("id : " + temp.getId() + " Name : " + temp.getName() + " Description: "+ temp.getDescription());
+                System.out.println("id : " + temp.getId() + " Name : " + temp.getName() + " Description: " + temp.getDescription());
             } else {
                 System.out.println("Заявки нет, к сожалению");
             }
@@ -163,10 +163,10 @@ public class MenuTracker {
     }
 
 
-    private static class FindItemsByName extends BaseAction{
+    private static class FindItemsByName extends BaseAction {
 
         private FindItemsByName(String info, int key) {
-            super(info,key);
+            super(info, key);
         }
 
         @Override
@@ -175,7 +175,7 @@ public class MenuTracker {
             if (tracker.findByName(name)[0].getId() != null) {
                 System.out.println("I find! : ");
                 for (Item task : tracker.findByName(name)) {
-                    System.out.println("id : " + task.getId() + " Name : " + task.getName() + " Description: "+ task.getDescription());
+                    System.out.println("id : " + task.getId() + " Name : " + task.getName() + " Description: " + task.getDescription());
                 }
             } else {
                 System.out.println("I don't find");

@@ -10,13 +10,13 @@ public class StartUITest {
     Tracker tracker = new Tracker();
     Item itemF = new Item();
     Item itemS = new Item();
-    Item itemT= new Item();
+    Item itemT = new Item();
 
     @Before
     public void loadBefore() {
         itemF = tracker.add(new Item("First", "testDell"));
         itemS = tracker.add(new Item("Second", "testDel2"));
-        itemT= tracker.add(new Item("Third", "testDel3"));
+        itemT = tracker.add(new Item("Third", "testDel3"));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class StartUITest {
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
         //Tracker работает немного по другому.
-        StubInput input = new StubInput(new String[]{"1","no","2",itemF.getId(),"test name", "desc", "y"});
+        StubInput input = new StubInput(new String[]{"1", "no", "2", itemF.getId(), "test name", "desc", "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -53,7 +53,7 @@ public class StartUITest {
     @Test
     public void whenDeleteThenTrackerHasDeleteItem() {
         //создаём StubInput с последовательностью действий
-        StubInput input = new StubInput(new String[]{ "3",itemS.getId(), "y"});
+        StubInput input = new StubInput(new String[]{"3", itemS.getId(), "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что второй элемент удалился и на его место встал третий.
@@ -68,7 +68,7 @@ public class StartUITest {
     @Test
     public void whenFindItemByIdThenTrackerReturnItem() {
         //создаём StubInput с последовательностью действий
-        StubInput input = new StubInput(new String[]{ "4", itemT.getId(), "y"});
+        StubInput input = new StubInput(new String[]{"4", itemT.getId(), "y"});
         // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
         // проверяем, что нашли третий элемент.

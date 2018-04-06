@@ -26,7 +26,7 @@ public class ValidateInputTest {
 
     @Test
     public void whenInvalidInput() {
-        ValidateInput input = new ValidateInput();
+        ValidateInput input = new ValidateInput(new StubInput(new String[] {"invalid", "1"}));
         input.ask("Enter", new int[] {1});
         assertThat(
                 this.mem.toString(),
@@ -38,12 +38,12 @@ public class ValidateInputTest {
 
     @Test
     public void whenInvalidRange() {
-        ValidateInput input = new ValidateInput();
-        input.ask("a", new int[] {0, 1, 2, 3, 4, 5, 6});
+        ValidateInput input = new ValidateInput(new StubInput(new String[] {"-1", "1"}));
+        input.ask("Enter: ", new int[] {0, 1, 2, 3, 4, 5, 6});
         assertThat(
                 this.mem.toString(),
                 is(
-                        String.format("Please enter validate data again.%n")
+                        String.format("Please, select key from range.%n")
                 )
         );
     }

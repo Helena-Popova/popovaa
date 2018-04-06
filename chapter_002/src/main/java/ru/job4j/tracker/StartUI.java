@@ -25,7 +25,7 @@ public class StartUI {
      */
     public StartUI() {
         this.tracker = new Tracker();
-        this.input = new ValidateInput();
+        this.input = new ValidateInput(new ConsoleInput());
     }
 
     /**
@@ -62,9 +62,8 @@ public class StartUI {
         do {
             menu.show();
             try {
-                menu.select(input.ask("Please, enter the key : ",menu.getRange()));
+                menu.select(input.ask("Please, enter the key : ", menu.getRange()));
             } catch (MenuOutException moe) {
-                moe.printStackTrace();
             }
             } while (!"y".equals(this.input.ask("Do you want to exit?( Y ) ")));
 
@@ -75,7 +74,7 @@ public class StartUI {
      * @param args входящие параметры консоли
      */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
     }
 
 }
