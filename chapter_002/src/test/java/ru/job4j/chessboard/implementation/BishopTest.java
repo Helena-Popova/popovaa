@@ -1,7 +1,9 @@
 package ru.job4j.chessboard.implementation;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import ru.job4j.chessboard.exception.ImposibleMoveException;
 import ru.job4j.chessboard.implementation.Bishop;
 import ru.job4j.chessboard.implementation.Cell;
@@ -11,6 +13,8 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class BishopTest {
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     /**
      * Тест на правильный путь ладьи
@@ -19,7 +23,7 @@ public class BishopTest {
     public void wayIsRight() {
         Bishop bishop = new Bishop(new Cell(5, 5));
         Cell[] result = bishop.way(new Cell(5, 5), new Cell(5, 8));
-        assertThat(result[0].getX(), is(new Cell(5, 6).getX()));
+        assertThat(result[0], is(new Cell(5, 6)));
     }
 
     /**
@@ -29,12 +33,11 @@ public class BishopTest {
      */
     @Test
     public void wayIsNotRight() throws ImposibleMoveException {
+        exception.expect(ImposibleMoveException.class);
+        exception.expectMessage("Выход за границу доски");
+
         Bishop  bishop = new Bishop(new Cell(5, 5));
-        try {
-            bishop.way(new Cell(5, 5), new Cell(5, -1));
-        } catch (ImposibleMoveException ime) {
-            Assert.assertNotEquals("", ime.getMessage());
-        }
+        bishop.way(new Cell(5, 5), new Cell(5, -1));
     }
 
     /**
@@ -43,7 +46,7 @@ public class BishopTest {
     @Test
     public void copyC() {
         Bishop  bishop = new Bishop(new Cell(5, 5));
-        assertThat(bishop.copyC(new Cell(1, 1)).position.getX(), is(new Cell(1, 1).getX()));
+        assertThat(bishop.copyC(new Cell(1, 1)).position, is(new Cell(1, 1)));
     }
 
 }

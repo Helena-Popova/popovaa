@@ -21,22 +21,18 @@ public class Bishop extends Figure  {
      */
     public Cell[] way(Cell source, Cell dest) throws ImposibleMoveException {
         int index = 0;
-        if (dest.getY() <= 8 && dest.getX() == source.getX()) {
-            Cell[] result = new Cell[Math.abs(dest.getY() - source.getY())];
-            for (int stepY = source.getY(); stepY != dest.getY();) {
-                stepY = dest.getY() > source.getY() ? ++stepY : --stepY;
-                result[index++] = new Cell(dest.getX(), stepY);
-            }
-            return result;
-        } else if (dest.getX() <= 8 && dest.getY() == source.getY()) {
-            Cell[] result = new Cell[Math.abs(dest.getX() - source.getX())];
-            for (int stepX = source.getX(); stepX != dest.getX();) {
-                stepX = dest.getX() > source.getX() ? ++stepX : --stepX;
-                result[index++] = new Cell(stepX, source.getY());
+        int horizontal = dest.getX() - source.getX(); // горизонтальная составляющая
+        int vertical = dest.getY() - source.getY(); //вертикальная
+
+        Cell[] result = new Cell[horizontal != 0 ? Math.abs(horizontal) : Math.abs(vertical)];
+        if (vertical == 0 || horizontal == 0) {
+            for (int step = horizontal != 0 ? source.getX() : source.getY(); step != (horizontal != 0 ? dest.getX() : dest.getY());) {
+                step = horizontal >= 0 && vertical >= 0 ? ++step :  --step;
+                result[index++] = horizontal != 0 ? new Cell(step, source.getY()) : new Cell(source.getX(), step);
             }
             return result;
         } else {
-            throw  new ImposibleMoveException("Bishop: ");
+            throw  new ImposibleMoveException("Такой путь невозможен.");
         }
     }
 

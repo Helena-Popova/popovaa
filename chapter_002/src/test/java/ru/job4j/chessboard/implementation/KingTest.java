@@ -1,6 +1,8 @@
 package ru.job4j.chessboard.implementation;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import ru.job4j.chessboard.exception.ImposibleMoveException;
 import ru.job4j.chessboard.implementation.Cell;
 import ru.job4j.chessboard.implementation.Figure;
@@ -17,7 +19,7 @@ public class KingTest {
     public void wayRight() {
         King figureFing = new King(new Cell(1, 1));
         Cell[] result = figureFing.way(new Cell(1, 1), new Cell(2, 2));
-        assertThat(result[0].getX(), is(new Cell(2, 2).getX()));
+        assertThat(result[0], is(new Cell(2, 2)));
     }
 
     /**
@@ -27,7 +29,7 @@ public class KingTest {
     public void copyCRight() {
         Figure figureFing = new King(new Cell(1, 1)).copyC(new  Cell(2, 2));
         Figure result = new King(new Cell(2, 2));
-        assertThat(result.position.getX(), is(figureFing.position.getX()));
+        assertThat(result.position, is(figureFing.position));
     }
 
     /**
@@ -37,7 +39,7 @@ public class KingTest {
     @Test(expected = ImposibleMoveException.class)
     public void testImposibleMoveException() {
         King figureFing = new King(new Cell(1, 1));
-        Cell[] result = figureFing.way(new Cell(1, 1), new Cell(3, 2));
+        figureFing.way(new Cell(1, 1), new Cell(3, 2));
     }
 
     /**
@@ -45,8 +47,8 @@ public class KingTest {
      */
     @Test(expected = ImposibleMoveException.class)
     public void testOutOfBoard() {
-        King figureFing = new King(new Cell(1, 1));
-        Cell[] result = figureFing.way(new Cell(8, 1), new Cell(9, 1));
+       King figureFing = new King(new Cell(1, 1));
+       Cell[] result = figureFing.way(new Cell(8, 1), new Cell(9, 1));
     }
 
 

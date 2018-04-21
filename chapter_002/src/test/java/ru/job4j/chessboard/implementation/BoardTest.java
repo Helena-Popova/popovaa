@@ -2,8 +2,10 @@ package ru.job4j.chessboard.implementation;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
+import org.junit.rules.ExpectedException;
 import ru.job4j.chessboard.exception.FigureNotFoundException;
 import ru.job4j.chessboard.exception.ImposibleMoveException;
 import ru.job4j.chessboard.exception.OccupiedWayException;
@@ -15,6 +17,9 @@ import ru.job4j.chessboard.implementation.King;
 public class BoardTest {
 
     Board chessTable = new Board();
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     /**
      * на доске имеются изначально две фигуры
@@ -31,11 +36,9 @@ public class BoardTest {
      */
     @Test
     public void addExceprionTest() throws OccupiedWayException {
-        try {
-            chessTable.add(new Bishop(new Cell(1, 1)));
-        } catch (OccupiedWayException thrown) {
-            Assert.assertNotEquals("", thrown.getMessage());
-        }
+        exception.expect(OccupiedWayException.class);
+        exception.expectMessage(" На пути уже стоит другая фигура ");
+        chessTable.add(new Bishop(new Cell(1, 1)));
     }
 
     /**
@@ -44,11 +47,9 @@ public class BoardTest {
      */
     @Test
     public void moveExceptionTestNoFigureInTheCell() throws FigureNotFoundException {
-        try {
-            chessTable.move(new Cell(3, 4), new Cell(4, 5));
-        } catch (FigureNotFoundException thrown) {
-            Assert.assertNotEquals("", thrown.getMessage());
-        }
+        exception.expect(FigureNotFoundException.class);
+        exception.expectMessage("В ячейке нет фигуры");
+        chessTable.move(new Cell(3, 4), new Cell(4, 5));
     }
 
     /**
@@ -58,11 +59,9 @@ public class BoardTest {
      */
     @Test
     public void moveExceptionTestImposibleWayForFigure() throws ImposibleMoveException {
-        try {
-            chessTable.move(new Cell(1, 1), new Cell(4, 5));
-        } catch (ImposibleMoveException thrown) {
-            Assert.assertNotEquals("", thrown.getMessage());
-        }
+        exception.expect(ImposibleMoveException.class);
+        exception.expectMessage("Фигура не может двигаться по такому пути.");
+        chessTable.move(new Cell(1, 1), new Cell(4, 5));
     }
 
     /**
@@ -71,11 +70,9 @@ public class BoardTest {
      */
     @Test
     public void moveExceptionTestSomeElseFigureStayOnWay() throws OccupiedWayException {
-        try {
-            chessTable.move(new Cell(1, 1), new Cell(1, 2));
-        } catch (OccupiedWayException thrown) {
-            Assert.assertNotEquals("", thrown.getMessage());
-        }
+        exception.expect(OccupiedWayException.class);
+        exception.expectMessage(" На пути уже стоит другая фигура ");
+        chessTable.move(new Cell(1, 1), new Cell(1, 2));
     }
 
 }

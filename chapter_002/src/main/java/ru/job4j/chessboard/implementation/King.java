@@ -12,15 +12,10 @@ public class King extends Figure {
         super(cell);
     }
     public  Cell[] way(Cell source, Cell dest) throws ImposibleMoveException {
-        if (1 <= dest.getX() && dest.getX() <= 8 && 1 <= dest.getY() && dest.getY() <= 8) {
-            if (Math.abs(dest.getY() - source.getY()) <= 1 && Math.abs(dest.getX() - source.getX()) <= 1) {
-                return new Cell[]{dest};
-            } else {
-                throw  new ImposibleMoveException("Фигура не может двигаться по такому пути.");
-            }
-
+        if (Math.abs(dest.getY() - source.getY()) <= 1 && Math.abs(dest.getX() - source.getX()) <= 1) {
+            return new Cell[]{dest};
         } else {
-            throw  new ImposibleMoveException("Выход за границы доски.");
+            throw  new ImposibleMoveException("Фигура не может двигаться по такому пути.");
         }
     }
 
