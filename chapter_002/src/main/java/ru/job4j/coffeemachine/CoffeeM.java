@@ -67,7 +67,6 @@ public class CoffeeM {
                 }
             }
         }
-
         int[] change = new int[changeList.size()];
         for (int i = 0; i < changeList.size(); i++) {
             change[i] = changeList.get(i);
