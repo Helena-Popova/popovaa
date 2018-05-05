@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * метод toArray должен равномерно разбить лист на количество строк двумерного массива.
@@ -44,6 +45,19 @@ public class ConvertList2Array {
                 mass[step] = index < list.size() ? list.get(index) : 0;
                 index++;
             }
+        }
+        return result;
+    }
+
+    /**
+     * Конвертация листа массивов в один лист Integer
+     * @param list
+     * @return
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int[] mass : list) {
+            result.addAll(Arrays.stream(mass).boxed().collect(Collectors.toList()));
         }
         return result;
     }
