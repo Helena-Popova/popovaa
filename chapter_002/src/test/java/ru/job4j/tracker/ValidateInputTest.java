@@ -6,6 +6,9 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -27,7 +30,9 @@ public class ValidateInputTest {
     @Test
     public void whenInvalidInput() {
         ValidateInput input = new ValidateInput(new StubInput(new String[] {"invalid", "1"}));
-        input.ask("Enter", new int[] {1});
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+        temp.add(1);
+        input.ask("Enter", temp);
         assertThat(
                 this.mem.toString(),
                 is(
@@ -39,7 +44,9 @@ public class ValidateInputTest {
     @Test
     public void whenInvalidRange() {
         ValidateInput input = new ValidateInput(new StubInput(new String[] {"-1", "1"}));
-        input.ask("Enter: ", new int[] {0, 1, 2, 3, 4, 5, 6});
+        ArrayList<Integer> temp = new ArrayList<Integer>();
+        temp.addAll(Arrays.stream(new int[] {0, 1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toList()));
+        input.ask("Enter: ", temp);
         assertThat(
                 this.mem.toString(),
                 is(

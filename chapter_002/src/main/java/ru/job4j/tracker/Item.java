@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+
 /**
 * Класс реализации описания заявки
 *@author Helena
@@ -11,7 +13,7 @@ public class Item {
 	private String name;
 	private String desc;
 	private long created;
-	private String[] comments;
+	private ArrayList<String> comments;
 	
 	public static final Item EMPTY = new Item();
 	
@@ -45,11 +47,8 @@ public class Item {
 		this.desc = aDesc;
 	}
 	
-	public void setComments(String[] aComments) {
-		for (int count = 0; count < aComments.length; count++) {
-		this.comments[count] = aComments[count];
-		}
-
+	public void setComments(ArrayList<String> aComments) {
+		this.comments.addAll(aComments);
 	}
 
 	public void setCreated(long aCreated) {
@@ -69,12 +68,16 @@ public class Item {
 		return this.desc;
 	}
 	
-	public String[] getComments() {
+	public ArrayList<String> getComments() {
 		return this.comments;
 	}
 
 	public long getCreated() {
 		return this.created;
+	}
+
+	public boolean compareId(String id) {
+		return this.getId().equals(id);
 	}
 
 }

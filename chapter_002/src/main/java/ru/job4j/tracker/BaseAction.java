@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.interfaces.UserAction;
+
 public abstract class BaseAction implements UserAction {
     private final int key;
     private final String info;

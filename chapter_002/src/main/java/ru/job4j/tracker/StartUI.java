@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
-import ru.job4j.tracker.*;
+import ru.job4j.tracker.exceptions.MenuOutException;
+import ru.job4j.tracker.interfaces.Input;
+import ru.job4j.tracker.interfaces.UserAction;
 
 /**
  *{@value #EXIT} // Константа для выхода из цикла.

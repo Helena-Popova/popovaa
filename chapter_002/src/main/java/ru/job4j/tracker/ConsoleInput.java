@@ -1,4 +1,8 @@
 package ru.job4j.tracker;
+import ru.job4j.tracker.exceptions.MenuOutException;
+import ru.job4j.tracker.interfaces.Input;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -13,7 +17,7 @@ public class ConsoleInput implements Input {
         return scanner.nextLine();
     }
 
-    public int ask(String question, int[] range) {
+    public int ask(String question, ArrayList<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int i : range) {

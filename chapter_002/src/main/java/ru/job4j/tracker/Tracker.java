@@ -1,4 +1,5 @@
 package ru.job4j.tracker;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -15,7 +16,7 @@ public class Tracker {
 	/**
 	 * Массив для хранения заявок
 	 */
-	private Item[] items = new Item[100];
+	private ArrayList<Item> items = new ArrayList<>();
 	private static final Random RM = new Random();
 
 	/**
@@ -25,7 +26,8 @@ public class Tracker {
 	 */
 	public Item add(Item item) {
 		item.setId(this.generateId());
-		items[count++] = item;
+		this.items.add(item);
+		count++;
 		return item;
 	}
 
@@ -44,10 +46,10 @@ public class Tracker {
 	 * @param item
 	 */
 	public void replace(String id, Item item) {
-		for (int i = 0; i < count; i++) {
-			if (this.items[i].getId().equals(id)) {
-				this.items[i] = item;
-				this.items[i].setId(id);
+		for (Item task : items) {
+			if (task.compareId(id)) {
+				this.items.set(this.items.indexOf(task), item);
+				break;
 			}
 		}
 	}
@@ -57,12 +59,11 @@ public class Tracker {
 	 * @param id
 	 */
 	public void delete(String id) {
-		for (int i = 0; i < count; i++) {
-			if (this.items[i].getId().equals(id)) {
-				this.items[i] = Item.EMPTY;
-				System.arraycopy(this.items, i + 1, this.items, i, count - i - 1);
-				this.items[count - 1] = Item.EMPTY;
+		for (Item task : items) {
+			if (task.compareId(id)) {
+				this.items.remove(task);
 				count--;
+				break;
 			}
 		}
 	}
@@ -71,16 +72,14 @@ public class Tracker {
 	 * Возвращает все ненулевые элементы списка.
 	 * @return список Item[]
 	 */
-	public Item[] findAll() {
-		Item[] itemsCopy = Arrays.copyOf(this.items, count);
-		int index = count;
-		int cCopy = 0;
-		for (int i = 0; i < index; i++) {
-			if (itemsCopy[i].getCreated() != 0 && !(itemsCopy[i].getDescription().equals(""))) {
-				System.arraycopy(itemsCopy, i, itemsCopy, cCopy++, 1);
+	public ArrayList<Item> findAll() {
+		ArrayList<Item> itemsCopy = new ArrayList<>();
+		for (Item item : items) {
+			if (item.getCreated() != 0 && !(item.getDescription().equals(""))) {
+				itemsCopy.add(item);
 			}
 		}
-		return Arrays.copyOf(itemsCopy, cCopy);
+		return itemsCopy;
 	}
 
 	/**
@@ -89,16 +88,14 @@ public class Tracker {
 	 * @param key
 	 * @return найденные занчения.
 	 */
-	public Item[] findByName(String key) {
-		Item[] itemsCopy = new Item[100];
-		itemsCopy[0]  = Item.EMPTY;
-		int cCopy = 0;
-		for (int i = 0; i < count; i++) {
-			if (this.items[i].getName().equals(key)) {
-				System.arraycopy(this.items, i, itemsCopy, cCopy++, 1);
+	public ArrayList<Item> findByName(String key) {
+		ArrayList<Item> itemsCopy = new ArrayList<>();
+		for (Item item : items) {
+			if (item.getName().equals(key)) {
+				itemsCopy.add(item);
 			}
 		}
-		return cCopy > 0 ? Arrays.copyOf(itemsCopy, cCopy) : Arrays.copyOf(itemsCopy, 1);
+		return itemsCopy;
 	}
 
 	/**
@@ -107,14 +104,13 @@ public class Tracker {
 	 * @return Item
 	 */
 	public Item findById(String id) {
-		Item findItem = Item.EMPTY; 
+		Item findItem = Item.EMPTY;
 		for (Item offer : items) {
 			if (offer != null && offer.getId().equals(id)) {
 				findItem = offer;
 				break;
 			}
 		}
-		
 		return findItem;
 	}
 
@@ -122,8 +118,8 @@ public class Tracker {
 	 * Возвращает все значения списка
 	 * @return Item[]
 	 */
-	public Item[] getAll() {
-		return Arrays.copyOf(this.items, count);
+	public ArrayList<Item> getAll() {
+		return this.items;
 	}
 
 	/**

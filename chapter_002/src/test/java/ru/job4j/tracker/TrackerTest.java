@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -10,7 +12,7 @@ public class TrackerTest extends Item {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
-        assertThat(tracker.getAll()[0], is(item));
+        assertThat(tracker.getAll().get(0), is(item));
     }
 
     @Test
@@ -19,8 +21,8 @@ public class TrackerTest extends Item {
         Item first = new Item("test1", "testDescription", 123L);
         Item second = new Item("test2", "testDescription", 124L);
         tracker.add(first);
-        tracker.replace(tracker.getAll()[0].getId(), second);
-        assertThat(tracker.getAll()[0], is(second));
+        tracker.replace(tracker.getAll().get(0).getId(), second);
+        assertThat(tracker.getAll().get(0), is(second));
     }
 
     @Test
@@ -32,8 +34,8 @@ public class TrackerTest extends Item {
         tracker.add(first);
         tracker.add(second);
         tracker.add(third);
-        tracker.delete(tracker.getAll()[1].getId());
-        assertThat(tracker.getAll()[1], is(third));
+        tracker.delete(tracker.getAll().get(1).getId());
+        assertThat(tracker.getAll().get(1), is(third));
     }
 
     @Test
@@ -45,8 +47,8 @@ public class TrackerTest extends Item {
         tracker.add(first);
         tracker.add(second);
         tracker.add(third);
-        Item[] result =  tracker.findAll();
-        assertThat(result[1], is(third));
+        ArrayList<Item> result =  tracker.findAll();
+        assertThat(result.get(1), is(third));
     }
 
     @Test
@@ -60,8 +62,8 @@ public class TrackerTest extends Item {
         tracker.add(second);
         tracker.add(third);
         tracker.add(fourth);
-        Item[] result =  tracker.findByName("test1");
-        assertThat(result[1], is(fourth));
+        ArrayList<Item> result =  tracker.findByName("test1");
+        assertThat(result.get(1), is(fourth));
     }
 
     @Test
@@ -75,7 +77,7 @@ public class TrackerTest extends Item {
         tracker.add(second);
         tracker.add(third);
         tracker.add(fourth);
-        String id = tracker.getAll()[3].getId();
+        String id = tracker.getAll().get(3).getId();
         Item result =  tracker.findById(id);
         assertThat(result, is(fourth));
     }

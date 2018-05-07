@@ -1,5 +1,10 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.exceptions.MenuOutException;
+import ru.job4j.tracker.interfaces.Input;
+
+import java.util.ArrayList;
+
 public class StubInput implements Input {
     private final String[] answers;
     private int count = 0;
@@ -12,7 +17,7 @@ public class StubInput implements Input {
         return this.answers[this.count++];
     }
 
-    public int ask(String question, int[] range) {
+    public int ask(String question, ArrayList<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int i : range) {
