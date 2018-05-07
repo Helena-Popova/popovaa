@@ -33,17 +33,15 @@ public class Person {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+        boolean result = false;
+        if (getClass() == o.getClass() && o != null) {
+            Person person = (Person) o;
+            result = Objects.equals(name, person.name)
+                    && Objects.equals(surname, person.surname)
+                    && Objects.equals(phone, person.phone)
+                    && Objects.equals(adress, person.adress);
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Person person = (Person) o;
-        return Objects.equals(name, person.name)
-                && Objects.equals(surname, person.surname)
-                && Objects.equals(phone, person.phone)
-                && Objects.equals(adress, person.adress);
+        return result;
     }
 
     @Override
@@ -52,9 +50,6 @@ public class Person {
     }
 
     public boolean contains(String key) {
-        if (this.adress.contains(key) || this.name.contains(key) || this.phone.contains(key) || this.surname.contains(key)) {
-            return true;
-        }
-        return false;
+        return this.adress.contains(key) || this.name.contains(key) || this.phone.contains(key) || this.surname.contains(key);
     }
 }
