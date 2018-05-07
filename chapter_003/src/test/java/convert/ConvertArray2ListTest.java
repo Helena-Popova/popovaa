@@ -31,4 +31,30 @@ public class ConvertArray2ListTest {
         List<Integer> result = list.toList(input);
         assertThat(expect.isEmpty(), is(result.isEmpty()));
     }
+
+    /**
+     * тесты для метода public List<Integer> toListbyForeach(int[][] array)
+     */
+    @Test
+    public void when2on2ArrayThenList4by2Method() {
+        ConvertArray2List list = new ConvertArray2List();
+        int[][] input = {
+                {1, 2},
+                {3, 4}
+        };
+        List<Integer> expect = Arrays.asList(
+                1, 2, 3, 4
+        );
+        List<Integer> result = list.toListbyForeach(input);
+        assertThat(result, is(expect));
+    }
+
+    @Test
+    public void whenArrayIsEmptyThenListIsEmptyby2Method() {
+        ConvertArray2List list = new ConvertArray2List();
+        int[][] input = {};
+        List<Integer> expect = Arrays.asList();
+        List<Integer> result = list.toListbyForeach(input);
+        assertThat(expect.isEmpty(), is(result.isEmpty()));
+    }
 }
