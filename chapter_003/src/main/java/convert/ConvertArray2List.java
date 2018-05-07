@@ -24,4 +24,19 @@ public class ConvertArray2List {
         }
         return list;
     }
+
+    /**
+     * Конвертация двумерного массива в ArrayList в два цикла
+     * @param array
+     * @return
+     */
+    public List<Integer> toListbyForeach(int[][] array) {
+        List<Integer> list = new ArrayList<>();
+        for (int[] mass : array) {
+            for (int step = 0; step < mass.length; step++) {
+                list.add(mass[step]);
+            }
+        }
+        return list;
+    }
 }
