@@ -33,8 +33,8 @@ public class ConvertArray2List {
     public List<Integer> toListbyForeach(int[][] array) {
         List<Integer> list = new ArrayList<>();
         for (int[] mass : array) {
-            for (int step = 0; step < mass.length; step++) {
-                list.add(mass[step]);
+            for (int step : mass) {
+                list.add(step);
             }
         }
         return list;
