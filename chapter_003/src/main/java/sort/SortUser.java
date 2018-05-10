@@ -16,14 +16,6 @@ import java.util.TreeSet;
 public class SortUser {
 
     public Set<User> sort(List<User> userList) {
-        Set<User> result = new TreeSet<>();
-        userList.sort(new Comparator<User>() {
-            @Override
-            public int compare(User o1, User o2) {
-                return o1.compareTo(o2);
-            }
-        });
-        result.addAll(userList);
-        return result;
+        return new TreeSet<>(userList);
     }
 }
