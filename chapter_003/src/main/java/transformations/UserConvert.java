@@ -20,4 +20,12 @@ public class UserConvert {
         }
         return users;
     }
+
+    public HashMap<Integer, User> processNextByForeach(List<User> list) {
+        HashMap<Integer, User> users = new HashMap<>();
+        for (User user : list) {
+            users.put(user.getId(), user);
+        }
+        return users;
+    }
 }
