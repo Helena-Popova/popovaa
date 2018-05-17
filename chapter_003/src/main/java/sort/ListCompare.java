@@ -20,14 +20,17 @@ public class ListCompare implements Comparator<String> {
     public int compare(String o1, String o2) {
         char[] v1 = o1.toCharArray();
         char[] v2 = o2.toCharArray();
-        int len1 = v1.length;
-        int len2 = v2.length;
-        int lim = Math.min(len1, len2);
+        int lim = Math.min(v1.length, v2.length);
+        int result = 0;
         for (int k = 0; k < lim; k++) {
-            if (v1[k] != v2[k]) {
-                return Integer.valueOf(v1[k]) - Integer.valueOf(v2[k]);
+            if (o1.charAt(k) != o2.charAt(k)) {
+                result = Integer.compare(o1.charAt(k), o2.charAt(k));
+                break;
             }
         }
-        return len1 - len2;
+        if (result == 0 && o1.length() != o2.length()) {
+            result = Integer.compare(o1.length(), o2.length());
+        }
+        return result;
     }
 }
