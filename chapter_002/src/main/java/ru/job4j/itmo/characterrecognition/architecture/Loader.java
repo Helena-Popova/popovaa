@@ -1,4 +1,4 @@
-package ru.job4j.itmo.characterrecognition;
+package ru.job4j.itmo.characterrecognition.architecture;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -6,6 +6,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
+
+import ru.job4j.itmo.characterrecognition.architecture.DataJPG;
 import ru.job4j.itmo.characterrecognition.exceptions.*;
 
 public class Loader {
@@ -18,9 +20,10 @@ public class Loader {
 
     /**
      * c этого метода все начинается. считывает байты картинок в ArrayList<int[]>
-     * @param trainImages
-     * @return возвращает лист с байтами картинок
-     * @throws IOException что то тоже про файл
+     * ArrayList<int[]> - хранилище векторов , в которые были переведины картинки
+     * @param trainImages -  адрес по которму лежит файл с картинками
+     * @return возвращает лист с векторами байтов картинок
+     * @throws IOException
      * @throws FileExceprion не тот файл
      */
     public ArrayList<int[]>  getColorsMatrix(String trainImages) throws IOException, FileExceprion {
@@ -38,6 +41,13 @@ public class Loader {
         return images;
     }
 
+    /**
+     * прочитывает матрицу 28 на 28 байт и сразу же переводит ее в вектор int - вых цветовых значений
+     * @param numRows количество строк
+     * @param numCols количетсов столбцов
+     * @param bb буффер считывания
+     * @return вектор
+     */
     private static int[] readImage(int numRows, int numCols, ByteBuffer bb) {
         int[] image = new int[numRows * numCols];
         for (int index = 0; index < numRows * numCols; index++) {
@@ -65,6 +75,11 @@ public class Loader {
         return  digits;
     }
 
+    /**
+     * проверяет Файл на несоответствие считываемым значениям
+     * @param exeption
+     * @param value
+     */
     public void checkExceprion(int exeption, int value) {
         if (exeption != value) {
             switch (exeption) {
@@ -78,7 +93,11 @@ public class Loader {
         }
     }
 
-
+    /**
+     * читает информацию побайтно из файла
+     * @param fileName путь к фалу, откуда надо прочитать
+     * @return
+     */
     public static ByteBuffer loadFile(String fileName) {
         try {
             RandomAccessFile f = new RandomAccessFile(fileName, "r");
@@ -99,7 +118,13 @@ public class Loader {
         }
     }
 
-
+    /**
+     * Получаем мапу где ключом является реальное значение картинки - лейбл,
+     * а значением ее плучившийся вектор со значениями цветов
+     * @return
+     * @throws IOException
+     * @throws FileExceprion
+     */
     public List<DataJPG>  getMap() throws IOException, FileExceprion {
         List<int[]> color = getColorsMatrix(trainImages);
         int[] label = getLabel(trainLabels);
@@ -114,6 +139,16 @@ public class Loader {
         return this.mnist;
     }
 
+    /**
+     * Достаем тестовую картинку из файла, обьявленному по пути testFile.
+     * Тесовая картинка нужна для распознавания. если брать картинку из главного фала,
+     * то совпадения для ближайшего соседа будет 100%,
+     * и точность распознавания для различных методов не будет иметь смысла.
+     * @param index индекс картинки из файла, которую мы берем. всгео в файле 10000 тестовых картинок
+     * @return
+     * @throws IOException
+     * @throws FileExceprion
+     */
     public DataJPG  getNumberOfRecognition(int index) throws IOException, FileExceprion {
         DataJPG dataJPG = new DataJPG(-1, new int[]{-1});
         List<int[]> color = getColorsMatrix(testFile);
