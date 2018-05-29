@@ -16,7 +16,7 @@ public class BankTransfers extends Bank {
 
     @Override
     void addUser(User user) {
-        if(!this.bankData.containsKey(user)) {
+        if (!this.bankData.containsKey(user)) {
             this.bankData.put(user, new ArrayList<Account>());
         } else {
             throw new TransferError(" Такой пользователь уже существует ");
@@ -25,7 +25,7 @@ public class BankTransfers extends Bank {
 
     @Override
     void deleteUser(User user) {
-        if(this.bankData.containsKey(user)) {
+        if (this.bankData.containsKey(user)) {
             this.bankData.remove(user);
         } else {
             throw new TransferError(" Такого пользователя еще не существует ");
@@ -35,7 +35,7 @@ public class BankTransfers extends Bank {
     @Override
     void addAccountToUser(String passport, Account account) {
         User user = findByPassport(passport);
-        if ( user != User.EMPTY) {
+        if (user != User.EMPTY) {
             this.bankData.get(user).add(account);
         }
     }
@@ -43,7 +43,7 @@ public class BankTransfers extends Bank {
     @Override
     void deleteAccountFromUser(String passport, Account account) {
         User user = findByPassport(passport);
-        if ( user != User.EMPTY) {
+        if (user != User.EMPTY) {
             this.bankData.get(user).remove(account);
         }
     }
@@ -71,8 +71,8 @@ public class BankTransfers extends Bank {
         User src = findByPassport(srcPassport);
         User dest = findByPassport(destPassport);
         if (src != User.EMPTY && dest != User.EMPTY) {
-            int indexSrc  = this.bankData.get(src).indexOf(findAccountByRequisite(src,srcRequisite));
-            int indexDest = this.bankData.get(src).indexOf(findAccountByRequisite(dest,dstRequisite));
+            int indexSrc  = this.bankData.get(src).indexOf(findAccountByRequisite(src, srcRequisite));
+            int indexDest = this.bankData.get(src).indexOf(findAccountByRequisite(dest, dstRequisite));
             double value = this.bankData.get(src).get(indexSrc).getValue();
             if (value > amount) {
                 this.bankData.get(src).get(indexSrc).setValue(value - amount);

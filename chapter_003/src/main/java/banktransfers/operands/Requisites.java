@@ -81,13 +81,17 @@ public class Requisites {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Requisites that = (Requisites) o;
-        return Objects.equals(userTIN, that.userTIN) &&
-                Objects.equals(userCPR, that.userCPR) &&
-                Objects.equals(bankAccountNumber, that.bankAccountNumber) &&
-                Objects.equals(bankBIC, that.bankBIC);
+        return Objects.equals(userTIN, that.userTIN)
+                && Objects.equals(userCPR, that.userCPR)
+                && Objects.equals(bankAccountNumber, that.bankAccountNumber)
+                && Objects.equals(bankBIC, that.bankBIC);
     }
 
     @Override

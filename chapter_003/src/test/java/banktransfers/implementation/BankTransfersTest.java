@@ -73,8 +73,8 @@ public class BankTransfersTest {
         bankTransfers.addAccountToUser("12 34 5678", new Account(100, sber));
         bankTransfers.addAccountToUser("12 34 5678", new Account(200, vtb));
 
-        accounts.add( new Account(100, sber));
-        accounts.add( new Account(200, vtb));
+        accounts.add(new Account(100, sber));
+        accounts.add(new Account(200, vtb));
 
         assertThat(accounts, is(bankTransfers.getUserAccounts("12 34 5678")));
 

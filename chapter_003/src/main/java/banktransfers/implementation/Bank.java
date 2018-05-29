@@ -13,7 +13,7 @@ abstract class Bank {
 
     abstract void deleteAccountFromUser(String passport, Account account);
 
-    abstract List<Account> getUserAccounts (String passport);
+    abstract List<Account> getUserAccounts(String passport);
 
-    abstract boolean transferMoney (String srcPassport, Requisites srcRequisite, String destPassport, Requisites dstRequisite, double amount);
+    abstract boolean transferMoney(String srcPassport, Requisites srcRequisite, String destPassport, Requisites dstRequisite, double amount);
 }
