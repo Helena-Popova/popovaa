@@ -2,6 +2,7 @@ package ru.job4j.iterators;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Итератор для двухмерного массива int[][]
@@ -31,6 +32,9 @@ public class IteratorForTwoDimensionalArray implements Iterator {
 
     @Override
     public Object next() {
+        if (index >= limit) {
+            throw new NoSuchElementException();
+        }
         return sourse[index++];
     }
 }

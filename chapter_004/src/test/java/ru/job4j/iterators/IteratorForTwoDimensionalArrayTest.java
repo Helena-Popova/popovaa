@@ -1,27 +1,64 @@
 package ru.job4j.iterators;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class IteratorForTwoDimensionalArrayTest {
-    IteratorForTwoDimensionalArray iter = new IteratorForTwoDimensionalArray(new int[][]{{1}, {2, 3}, {4, 6, 7}});
+    private Iterator<Integer> it;
 
-    @Test
-    public void hasNext() {
-        int count = 0;
-        while (iter.hasNext()) {
-            iter.next();
-            count++;
-        }
-        assertThat(count, is(6));
+    @Before
+    public void setUp() {
+        it = new IteratorForTwoDimensionalArray(new int[][]{{1, 2, 3}, {4, 5, 6}});
     }
 
     @Test
-    public void next() {
-        iter.next();
-        iter.next();
-        assertThat(iter.next(), is(3));
+    public void hasNextNextSequentialInvocation() {
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(1));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(2));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(3));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(4));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(5));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(6));
+        assertThat(it.hasNext(), is(false));
+    }
+
+    @Test
+    public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation() {
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(4));
+        assertThat(it.next(), is(5));
+        assertThat(it.next(), is(6));
+    }
+
+    @Test
+    public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(4));
+        assertThat(it.next(), is(5));
+        assertThat(it.next(), is(6));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void shoulThrowNoSuchElementException() {
+        it = new IteratorForTwoDimensionalArray(new int[][]{});
+        it.next();
     }
 }

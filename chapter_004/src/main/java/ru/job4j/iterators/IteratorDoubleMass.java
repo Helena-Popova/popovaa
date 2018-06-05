@@ -1,5 +1,6 @@
 package ru.job4j.iterators;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * 5.1.2. Создать итератор четные числа [#150]
@@ -35,6 +36,6 @@ public class IteratorDoubleMass implements Iterator {
                 count++;
             }
         }
-        return null;
+        throw new NoSuchElementException();
     }
 }
