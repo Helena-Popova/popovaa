@@ -1,6 +1,9 @@
 package ru.job4j.iterators;
-
 import java.util.Iterator;
+
+/**
+ * 5.1.2. Создать итератор четные числа [#150]
+ */
 
 public class IteratorDoubleMass implements Iterator {
 
