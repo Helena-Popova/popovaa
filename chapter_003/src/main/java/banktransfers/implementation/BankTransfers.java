@@ -1,4 +1,5 @@
 package banktransfers.implementation;
+
 import banktransfers.exceptions.TransferError;
 import banktransfers.operands.*;
 
@@ -16,20 +17,19 @@ public class BankTransfers extends Bank {
 
     @Override
     void addUser(User user) {
-        if (!this.bankData.containsKey(user)) {
-            this.bankData.put(user, new ArrayList<Account>());
-        } else {
+        if (this.bankData.containsKey(user)) {
             throw new TransferError(" Такой пользователь уже существует ");
         }
+        this.bankData.put(user, new ArrayList<Account>());
+
     }
 
     @Override
     void deleteUser(User user) {
-        if (this.bankData.containsKey(user)) {
-            this.bankData.remove(user);
-        } else {
+        if (!this.bankData.containsKey(user)) {
             throw new TransferError(" Такого пользователя еще не существует ");
         }
+        this.bankData.remove(user);
     }
 
     @Override
@@ -51,13 +51,14 @@ public class BankTransfers extends Bank {
     @Override
     List<Account> getUserAccounts(String passport) {
         User user = findByPassport(passport);
-        List<Account> result =  user != User.EMPTY ? this.bankData.get(user) : new ArrayList<>();
+        List<Account> result = user != User.EMPTY ? this.bankData.get(user) : new ArrayList<>();
         return result;
     }
 
     /**
      * Mетод для перечисления денег с одного счёта на другой счёт:
      * если счёт не найден или не хватает денег на счёте srcAccount (с которого переводят) должен вернуть false.
+     *
      * @param srcPassport
      * @param srcRequisite
      * @param destPassport
@@ -71,7 +72,7 @@ public class BankTransfers extends Bank {
         User src = findByPassport(srcPassport);
         User dest = findByPassport(destPassport);
         if (src != User.EMPTY && dest != User.EMPTY) {
-            int indexSrc  = this.bankData.get(src).indexOf(findAccountByRequisite(src, srcRequisite));
+            int indexSrc = this.bankData.get(src).indexOf(findAccountByRequisite(src, srcRequisite));
             int indexDest = this.bankData.get(src).indexOf(findAccountByRequisite(dest, dstRequisite));
             double value = this.bankData.get(src).get(indexSrc).getValue();
             if (value > amount) {
@@ -85,6 +86,7 @@ public class BankTransfers extends Bank {
 
     /**
      * Найти юзера по Passport
+     *
      * @param passport
      * @return
      */
@@ -101,11 +103,12 @@ public class BankTransfers extends Bank {
 
     /**
      * Найти нужный счет у юзера, если его нет, вернуть Account.EMPTY.
+     *
      * @param aRequisite
      * @return
      */
     private Account findAccountByRequisite(User user, Requisites aRequisite) {
-        List<Account> list =  this.bankData.get(user);
+        List<Account> list = this.bankData.get(user);
         Account result = Account.EMPTY;
         for (Account account : list) {
             if (account.getRequisites().equals(aRequisite)) {
