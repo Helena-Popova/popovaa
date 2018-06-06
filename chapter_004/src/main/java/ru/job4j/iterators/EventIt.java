@@ -33,11 +33,10 @@ public class EventIt implements Iterator {
         while (index < source.length && source[index] % 2 != 0) {
             index++;
         }
-        if (index < source.length) {
-            return source[index++];
-        } else {
+        if (index >= source.length) {
             throw new NoSuchElementException();
         }
+        return source[index++];
     }
 }
 
