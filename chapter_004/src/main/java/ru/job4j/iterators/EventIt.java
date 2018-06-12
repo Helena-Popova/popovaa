@@ -21,6 +21,7 @@ public class EventIt implements Iterator {
         int temp = 0;
         while (index + temp < source.length) {
             if (source[index + temp] % 2 == 0) {
+                index = index + temp;
                 return true;
             }
             temp++;
@@ -30,10 +31,7 @@ public class EventIt implements Iterator {
 
     @Override
     public Object next() {
-        while (index < source.length && source[index] % 2 != 0) {
-            index++;
-        }
-        if (index >= source.length) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
         return source[index++];
