@@ -1,4 +1,5 @@
 package ru.job4j.iterators;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -9,33 +10,38 @@ import java.util.NoSuchElementException;
 public class IteratorDoubleMass implements Iterator {
 
     private int[][] source;
-    private int limits = 0;
     private int index = 0;
 
     public IteratorDoubleMass(int[][] aSource) {
-        for (int[] mass : aSource) {
-            limits += mass.length;
-        }
         source = aSource;
     }
 
     @Override
     public boolean hasNext() {
-        return index < limits;
+        return fintElement() != null;
     }
 
     @Override
     public Object next() {
+        Integer result = fintElement();
+        if (result == null) {
+            throw new NoSuchElementException();
+        }
+        index++;
+        return result;
+    }
+
+    private Integer fintElement() {
+        Integer result = null;
         int count = 0;
         for (int[] mass : source) {
             for (int i : mass) {
                 if (index == count) {
-                    index++;
-                    return i;
+                    result = i;
                 }
                 count++;
             }
         }
-        throw new NoSuchElementException();
+        return result;
     }
 }

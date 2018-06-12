@@ -13,11 +13,8 @@ public class IteratorForTwoDimensionalArray implements Iterator {
 
     private int[] sourse;
     private int index = 0;
-    private int limit = 0;
 
     public IteratorForTwoDimensionalArray(int[][] aSource) {
-        Arrays.stream(aSource).forEach(mass -> limit += mass.length);
-        sourse = new int[limit];
         for (int[] str : aSource) {
             System.arraycopy(str, 0, sourse, index, str.length);
             index += str.length;
@@ -27,12 +24,12 @@ public class IteratorForTwoDimensionalArray implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return index < limit;
+        return index < sourse.length;
     }
 
     @Override
     public Object next() {
-        if (index >= limit) {
+        if (index >= sourse.length) {
             throw new NoSuchElementException();
         }
         return sourse[index++];
