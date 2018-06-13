@@ -51,9 +51,15 @@ public class SortDepartments {
         Arrays.sort(result, (o1, o2) -> {
             int out = -o1.getMainD().compareTo(o2.getMainD());
             if (out == 0) {
-                out = o1.getService().compareTo(o2.getService());
-                if (out == 0) {
-                    out = o1.getSeparation().compareTo(o2.getSeparation());
+                int limit = Math.min(o1.getServiceInfo().length, o2.getServiceInfo().length);
+                for (int i = 0; i < limit; i++) {
+                    out = o1.getServiceInfo()[i].compareTo(o2.getServiceInfo()[i]);
+                    if (out != 0) {
+                        break;
+                    }
+                }
+                if (out == 0 && o1.getServiceInfo().length != o2.getServiceInfo().length) {
+                    out = o1.getServiceInfo().length - o2.getServiceInfo().length;
                 }
             }
             return out;

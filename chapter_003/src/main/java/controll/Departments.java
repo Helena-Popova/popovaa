@@ -1,35 +1,27 @@
 package controll;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Departments implements Comparable<Departments> {
     private String mainD = "";
-    private String service = "";
-    private String separation = "";
+    private String[] serviceInfo;
 
     public Departments(String info) {
         String separator = "\\";
-        String[] fill = info.split(Pattern.quote(separator));
-        this.mainD = fill[0];
-        if (fill.length == 3) {
-            this.service = fill[1];
-            this.separation = fill[2];
-        } else if (fill.length == 2) {
-            this.service = fill[1];
-        }
+        String[] services = info.split(Pattern.quote(separator));
+        this.mainD = services[0];
+        serviceInfo = new String[services.length - 1];
+        System.arraycopy(services, 1, serviceInfo, 0, serviceInfo.length);
     }
 
     public String getMainD() {
         return mainD;
     }
 
-    public String getService() {
-        return service;
-    }
-
-    public String getSeparation() {
-        return separation;
+    public String[] getServiceInfo() {
+        return serviceInfo;
     }
 
     @Override
@@ -42,41 +34,46 @@ public class Departments implements Comparable<Departments> {
         }
         Departments that = (Departments) o;
         return Objects.equals(mainD, that.mainD)
-                && Objects.equals(service, that.service)
-                && Objects.equals(separation, that.separation);
+                && Arrays.equals(serviceInfo, that.serviceInfo);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(mainD, service, separation);
+        int result = Objects.hash(mainD);
+        result = 31 * result + Arrays.hashCode(serviceInfo);
+        return result;
     }
 
     @Override
     public String toString() {
-        if (this.separation.length() != 0) {
-            return mainD + "\\" + service + "\\" + separation;
-        } else if (this.service.length() != 0) {
-            return mainD + "\\" + service;
-        } else {
-            return mainD;
+        StringBuilder result = new StringBuilder();
+        result.append(mainD);
+        if (serviceInfo.length != 0) {
+            for (String s : serviceInfo) {
+                result.append("\\").append(s);
+            }
+
         }
+        return result.toString();
     }
 
     @Override
     public int compareTo(Departments dep) {
         int result = this.mainD.compareTo(dep.getMainD());
         if (result == 0) {
-            result = this.service.compareTo(dep.getService());
-            if (result == 0) {
-                result = this.separation.compareTo(dep.getSeparation());
+            for (int i = 0; i < serviceInfo.length; i++) {
+                result = this.serviceInfo[i].compareTo(dep.getServiceInfo()[i]);
+                if (result != 0) {
+                    break;
+                }
             }
         }
         return result;
     }
 
     public boolean infoIsExist() {
-        if (this.service.length() != 0 || this.separation.length() != 0) {
+        if (serviceInfo.length != 0) {
             return true;
         }
         return false;

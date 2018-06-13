@@ -16,29 +16,33 @@ public class SortDepartmentsTest {
 
                 "K1\\SK2",
 
-                "K1\\SK1\\SSK1",
+                "K1\\SK1\\SSK2\\SSK2\\SSK2\\SSK2",
 
-                "K1\\SK1\\SSK2",
+                "K1\\SK1\\SSK1\\SSK2\\SSK2\\SSK2",
+
+                "K1\\SK1\\SSK1\\SSK2\\SSK2\\SSK1",
 
                 "K2",
 
-                "K2\\SK1\\SSK1",
+                "K2\\SK1\\SSK2\\SQK3",
 
-                "K2\\SK1\\SSK2"});
+                "K2\\SK1\\SSK1\\SQK3"});
         assertThat(result, is(new String[] {
                 "K2",
 
-                "K2\\SK1\\SSK1",
+                "K2\\SK1\\SSK1\\SQK3",
 
-                "K2\\SK1\\SSK2",
+                "K2\\SK1\\SSK2\\SQK3",
 
                 "K1",
 
                 "K1\\SK1",
 
-                "K1\\SK1\\SSK1",
+                "K1\\SK1\\SSK1\\SSK2\\SSK2\\SSK1",
 
-                "K1\\SK1\\SSK2",
+                "K1\\SK1\\SSK1\\SSK2\\SSK2\\SSK2",
+
+                "K1\\SK1\\SSK2\\SSK2\\SSK2\\SSK2",
 
                 "K1\\SK2"}));
 
@@ -88,9 +92,9 @@ public class SortDepartmentsTest {
 
                 "K1\\SK2",
 
-                "K1\\SK1\\SSK1",
+                "K1\\SK1\\SSK2\\SQK3",
 
-                "K1\\SK1\\SSK2",
+                "K1\\SK1\\SSK1\\SQK4",
 
                 "K2",
 
@@ -103,9 +107,10 @@ public class SortDepartmentsTest {
 
                 "K1\\SK1",
 
-                "K1\\SK1\\SSK1",
+                "K1\\SK1\\SSK1\\SQK4",
 
-                "K1\\SK1\\SSK2",
+                "K1\\SK1\\SSK2\\SQK3",
+
 
                 "K1\\SK2",
 
