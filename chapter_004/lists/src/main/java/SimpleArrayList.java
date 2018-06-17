@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class SimpleArrayList<E> {
 
     private int size;
@@ -20,14 +22,21 @@ public class SimpleArrayList<E> {
     }
 
     public E delete() {
-        Node<E> jump = first.next.next;
-        first = first.next;
-        first.next = jump;
+        E result = null;
+        if(first.next != null) {
+            first = first.next;
+            result = first.date;
+        } else {
+            first = null;
+        }
         size--;
-        return first.date;
+        return result;
     }
 
     public E get(int index) {
+        if (this.first == null) {
+            throw new NoSuchElementException();
+        }
         Node<E> result = this.first;
         int i = 0;
         while (i < index) {
