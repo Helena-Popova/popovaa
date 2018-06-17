@@ -44,11 +44,11 @@ public class SimpleArray<T> implements Iterable<T> {
         if (index > objects.length) {
             throw new IndexOutOfBoundsException();
         }
-        while (step < count-1) {
+        while (step < count - 1) {
             objects[step] = objects[step + 1];
             step++;
         }
-        objects[step-1] = null;
+        objects[step - 1] = null;
         count--;
         return true;
 
@@ -75,7 +75,7 @@ public class SimpleArray<T> implements Iterable<T> {
                     if (objects[index] != null) {
                         result = true;
                         break;
-                    } else if(index < objects.length - 1) {
+                    } else if (index < objects.length - 1) {
                         index++;
                     }
                 }

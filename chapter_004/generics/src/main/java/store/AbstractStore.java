@@ -47,7 +47,7 @@ public abstract class AbstractStore<T extends Base> implements Store<T>  {
         return dataArray.get(index);
     }
 
-    private int findIndexInStore( String id) {
+    private int findIndexInStore(String id) {
         int result = -1;
         Iterator<T> iterator = dataArray.iterator();
         int index = 0;

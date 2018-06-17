@@ -32,8 +32,8 @@ public class PrimeIterator implements Iterator {
         if (i == 1) {
             result = false;
         } else {
-            while (count < i ) {
-                if (i%count == 0 ) {
+            while (count < i) {
+                if (i % count == 0) {
                     result =  false;
                     break;
                 }
@@ -47,7 +47,7 @@ public class PrimeIterator implements Iterator {
         Integer result  = null;
         int count = 0;
         while (index + count < numbers.length) {
-            if (isItPrimeNumber(numbers[index +count])) {
+            if (isItPrimeNumber(numbers[index + count])) {
                 result = count;
                 break;
             }

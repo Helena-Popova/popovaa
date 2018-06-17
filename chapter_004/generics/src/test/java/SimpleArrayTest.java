@@ -13,19 +13,19 @@ public class SimpleArrayTest {
     private SimpleArray<Integer> simpleArray;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         simpleArray = new SimpleArray(12);
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void shouldReturnFalseHasNextBecauseArrayIsEmpty () {
+    public void shouldReturnFalseHasNextBecauseArrayIsEmpty() {
         Iterator<Integer> it = simpleArray.iterator();
         assertThat(it.hasNext(), is(false));
         it.next();
     }
 
     @Test
-    public void returnTrueWhenAddMassiveWithLengthLessArrayLength () {
+    public void returnTrueWhenAddMassiveWithLengthLessArrayLength() {
         assertTrue(simpleArray.add(1, 2, 3, 4, 5, 6, 7));
         Iterator<Integer> it = simpleArray.iterator();
         assertThat(it.hasNext(), is(true));
@@ -46,7 +46,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void shouldReturnChangedArray (){
+    public void shouldReturnChangedArray() {
         assertTrue(simpleArray.add(1, 1, 1, 1, 1, 1, 1));
         assertTrue(simpleArray.set(2, 3));
         Iterator<Integer> it = simpleArray.iterator();
@@ -69,7 +69,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void shouldReturnArrayLessThanOne(){
+    public void shouldReturnArrayLessThanOne() {
         assertTrue(simpleArray.add(1, 2, 3, 4, 5, 6, 7));
         assertTrue(simpleArray.delete(2));
         Iterator<Integer> it = simpleArray.iterator();
@@ -89,7 +89,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void shouldReturnSameValueInBothMethods (){
+    public void shouldReturnSameValueInBothMethods() {
         assertTrue(simpleArray.add(1, 2, 3, 4, 5, 6, 7));
         assertTrue(simpleArray.delete(2));
         Iterator<Integer> it = simpleArray.iterator();
@@ -107,5 +107,4 @@ public class SimpleArrayTest {
         assertThat(it.next(), is(simpleArray.get(5)));
         assertThat(it.hasNext(), is(false));
     }
-
 }
