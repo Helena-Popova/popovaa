@@ -12,8 +12,8 @@ public class IteratorDoubleMass implements Iterator {
     private int[][] source;
     private int index = 0;
 
-    public IteratorDoubleMass(int[][] aSource) {
-        source = aSource;
+    public IteratorDoubleMass(int[][] src) {
+        this.source = src;
     }
 
     @Override
