@@ -23,7 +23,7 @@ public class SimpleArrayList<E> {
 
     public E delete() {
         E result = null;
-        if(first.next != null) {
+        if (first.next != null) {
             first = first.next;
             result = first.date;
         } else {
