@@ -47,6 +47,8 @@ public class DinamicLinkedListTest {
         Iterator<Integer> integerIterator1 = dinamicLinkedList.iterator();
         assertTrue(integerIterator.hasNext());
         assertTrue(integerIterator1.hasNext());
+        integerIterator.next();
+        integerIterator1.next();
         integerIterator.remove();
         integerIterator1.hasNext();
 
