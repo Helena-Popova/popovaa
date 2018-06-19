@@ -1,3 +1,5 @@
+package lists;
+
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -77,17 +79,15 @@ public class DinamicLinkedList<E> implements Iterable<E> {
             }
 
             public void remove() {
-                if (previousStep.previous != null) {
-                    previousStep.previous.next = previousStep.next;
-                } else {
-                    previousStep.next.previous = null;
-                    first = previousStep.next;
-                }
                 if (previousStep.next != null) {
                     previousStep.next.previous = previousStep.previous;
-                } else {
-                    previousStep.previous.next = null;
                 }
+                if(previousStep.previous != null) {
+                    previousStep.previous.next = previousStep.next;
+                } else {
+                    first = previousStep.next;
+                }
+
                 modCount++;
                 expectedModCount++;
                 size--;
