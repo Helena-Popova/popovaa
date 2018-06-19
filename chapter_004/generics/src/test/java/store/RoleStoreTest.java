@@ -68,13 +68,4 @@ public class RoleStoreTest {
         assertTrue(roleStore.delete(id));
         roleStore.findById(id);
     }
-
-    @Test(expected = ClassCastException.class)
-    public void shouldReturnClassCastExceptionWhenTryAddAnatheClass() {
-        RoleStore<User> errorStore  = new RoleStore<>(12);
-        errorStore.add(new User("error"));
-    }
-
-
-
 }

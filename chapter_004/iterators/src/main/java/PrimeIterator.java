@@ -17,7 +17,7 @@ public class PrimeIterator implements Iterator {
 
     @Override
     public Object next() {
-        if (findElement() == null) {
+        if (!hasNext()) {
             throw new NoSuchElementException();
         }
         index += findElement();

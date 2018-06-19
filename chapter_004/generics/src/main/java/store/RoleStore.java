@@ -5,25 +5,19 @@ import base.*;
 
 import java.util.NoSuchElementException;
 
-public class RoleStore<T extends Base>  extends AbstractStore<T> {
+public class RoleStore<T extends Base>  extends AbstractStore<Role> {
 
     public RoleStore(int size) {
         super(size);
     }
 
     @Override
-    public void add(T model) {
-        if (!(model instanceof Role)) {
-            throw new ClassCastException();
-        }
+    public void add(Role model) {
         super.add(model);
     }
 
     @Override
-    public boolean replace(String id, T model) {
-        if (!(model instanceof Role)) {
-            throw new ClassCastException();
-        }
+    public boolean replace(String id, Role model) {
         return super.replace(id, model);
     }
 }
