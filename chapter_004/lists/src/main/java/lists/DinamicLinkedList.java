@@ -11,7 +11,7 @@ public class DinamicLinkedList<E> implements Iterable<E> {
     int modCount = 0;
     int size = 0;
 
-    private static class Node<E> {
+    public static class Node<E> {
         E date = null;
         Node<E> next = null;
         Node<E> previous = null;
@@ -82,7 +82,7 @@ public class DinamicLinkedList<E> implements Iterable<E> {
                 if (previousStep.next != null) {
                     previousStep.next.previous = previousStep.previous;
                 }
-                if(previousStep.previous != null) {
+                if (previousStep.previous != null) {
                     previousStep.previous.next = previousStep.next;
                 } else {
                     first = previousStep.next;
