@@ -54,4 +54,5 @@ public class SimpleArrayListTest {
         assertThat(1, is(simpleArrayList.delete()));
         simpleArrayList.get(0);
     }
+
 }
