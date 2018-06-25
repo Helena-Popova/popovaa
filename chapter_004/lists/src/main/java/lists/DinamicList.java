@@ -6,21 +6,23 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class DinamicList<E> implements Iterable<E> {
-    private Object[] container = new Object[10];
+    private int capacity = 10;
+    private Object[] container = new Object[capacity];
     int index  = 0;
     int modCount = 0;
 
     public boolean add(E value) {
-        if (container.length != 0 && container.length % 10 == 0) {
-            container = Arrays.copyOf(container, container.length + 10);
+        if (index >= capacity) {
+            capacity = (capacity * 3) / 2 + 1;
+            container = Arrays.copyOf(container, capacity);
         }
         container[index++] = value;
         modCount++;
         return true;
     }
 
-    public E get(int index) {
-        return (E) container[index];
+    public E get(int sIndex) {
+        return (E) container[sIndex];
     }
 
     public Iterator<E> iterator() {
@@ -34,18 +36,7 @@ public class DinamicList<E> implements Iterable<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                boolean result = false;
-                int i = count;
-                if (count < container.length) {
-                    while (i < container.length) {
-                        if (container[count] != null) {
-                            result = true;
-                            break;
-                        }
-                        i++;
-                    }
-                }
-                return result;
+                return count < capacity;
             }
 
             public E next() {
@@ -62,6 +53,9 @@ public class DinamicList<E> implements Iterable<E> {
                 if (count > container.length || count < 0) {
                     throw new IndexOutOfBoundsException();
                 }
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 container[count] = null;
                 count--;
                 expectedModCount++;
@@ -71,4 +65,5 @@ public class DinamicList<E> implements Iterable<E> {
         };
         return iterator;
     }
+
 }

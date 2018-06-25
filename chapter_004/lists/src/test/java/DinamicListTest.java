@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -44,6 +45,33 @@ public class DinamicListTest {
         assertTrue(integerIterator1.hasNext());
         integerIterator.remove();
         integerIterator1.hasNext();
+    }
+
+    @Test
+    public void passingThroughTheListFunctionHasNextWillReturnAnExceptionAtTheEnd() {
+        Iterator<Integer> integerIterator = dinamicList.iterator();
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(0));
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(1));
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(2));
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(3));
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(4));
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(5));
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(6));
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(7));
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(8));
+        assertTrue(integerIterator.hasNext());
+        assertThat(integerIterator.next(), is(9));
+        assertFalse(integerIterator.hasNext());
+
 
     }
 }
