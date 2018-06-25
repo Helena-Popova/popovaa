@@ -24,10 +24,9 @@ public class SimpleArrayList<E> {
     }
 
     public E delete() {
-        E result = null;
+        E result = first.date;
         if (first.next != null) {
             first = first.next;
-            result = first.date;
         } else {
             first = null;
         }

@@ -36,22 +36,22 @@ public class SimpleArrayListTest {
     @Test(expected = NoSuchElementException.class)
     public void whenDeleteAllElementsThanGetEmptyArray() {
         assertThat(6, is(simpleArrayList.get(0)));
-        simpleArrayList.delete();
+        assertThat(6, is(simpleArrayList.delete()));
         assertThat(5, is(simpleArrayList.get(0)));
         assertThat(simpleArrayList.getSize(), is(5));
-        simpleArrayList.delete();
+        assertThat(5, is(simpleArrayList.delete()));
         assertThat(4, is(simpleArrayList.get(0)));
         assertThat(simpleArrayList.getSize(), is(4));
-        simpleArrayList.delete();
+        assertThat(4, is(simpleArrayList.delete()));
         assertThat(3, is(simpleArrayList.get(0)));
         assertThat(simpleArrayList.getSize(), is(3));
-        simpleArrayList.delete();
+        assertThat(3, is(simpleArrayList.delete()));
         assertThat(2, is(simpleArrayList.get(0)));
         assertThat(simpleArrayList.getSize(), is(2));
-        simpleArrayList.delete();
+        assertThat(2, is(simpleArrayList.delete()));
         assertThat(1, is(simpleArrayList.get(0)));
         assertThat(simpleArrayList.getSize(), is(1));
-        simpleArrayList.delete();
+        assertThat(1, is(simpleArrayList.delete()));
         simpleArrayList.get(0);
     }
 }
