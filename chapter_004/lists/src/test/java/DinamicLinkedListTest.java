@@ -13,10 +13,10 @@ public class DinamicLinkedListTest {
 
     @Before
     public void setUp() {
-        int i = 99;
-        while (i >= 0) {
+        int i = 0;
+        while (i < 100) {
             dinamicLinkedList.add(i);
-            i--;
+            i++;
         }
     }
 
