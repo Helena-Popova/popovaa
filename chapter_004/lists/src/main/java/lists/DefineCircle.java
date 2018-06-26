@@ -5,18 +5,17 @@ import java.util.Iterator;
 public class DefineCircle {
     public boolean hasCycle(DinamicLinkedList.Node first) {
         boolean result = false;
-        DinamicLinkedList.Node storeV = first;
-        DinamicLinkedList.Node circleV = first;
-        LabelRound: while (storeV != null) {
-            while (circleV.next != storeV.next) {
-                if (storeV.next == circleV) {
+        if (first != null) {
+            DinamicLinkedList.Node step = first;
+            DinamicLinkedList.Node stepNext = first;
+            while (step != null && stepNext != null && stepNext.next != null) {
+                step = step.next;
+                stepNext = stepNext.next.next;
+                if (step == stepNext) {
                     result = true;
-                    break LabelRound;
+                    break;
                 }
-                circleV = circleV.next;
             }
-            storeV = storeV.next;
-            circleV = first;
         }
         return result;
     }
