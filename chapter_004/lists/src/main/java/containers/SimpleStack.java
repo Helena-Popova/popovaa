@@ -10,12 +10,8 @@ public class SimpleStack<T> {
 
 
     public T poll() {
-        Iterator<T> iterator = linkedList.iterator();
-        if (!iterator.hasNext()) {
-            throw new NoSuchElementException();
-        }
-        T result = iterator.next();
-        iterator.remove();
+        T result = linkedList.get(linkedList.getSize() - 1);
+        linkedList.remove(linkedList.getSize() - 1);
         return result;
     }
 

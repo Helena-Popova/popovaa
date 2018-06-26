@@ -9,21 +9,13 @@ public class SimpleQueue<T> {
     DinamicLinkedList<T> linkedList = new DinamicLinkedList<>();
 
     public T poll() {
-        Iterator<T> iterator = linkedList.iterator();
-        T result = null;
-        while (iterator.hasNext()) {
-            result = iterator.next();
-        }
-        iterator.remove();
+        T result = linkedList.get(0);
+        linkedList.remove(0);
         return result;
     }
 
     public void push(T value) {
         linkedList.add(value);
-    }
-
-    public boolean isCircle() {
-        return linkedList.hasCycle();
     }
 
 }

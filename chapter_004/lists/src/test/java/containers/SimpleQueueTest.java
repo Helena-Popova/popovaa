@@ -3,6 +3,8 @@ package containers;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -18,7 +20,7 @@ public class SimpleQueueTest {
         }
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void poll() {
         assertThat(0, is(queue.poll()));
         assertThat(1, is(queue.poll()));
