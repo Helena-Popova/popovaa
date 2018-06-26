@@ -119,6 +119,9 @@ public class DinamicLinkedList<E> implements Iterable<E> {
             }
 
             public void remove() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 replaseReference(previousStep);
                 modCount++;
                 expectedModCount++;
