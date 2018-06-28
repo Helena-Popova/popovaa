@@ -33,10 +33,10 @@ public class HashCodeForMap {
      * @param key
      * @return
      */
-    static final int hash(Object key) {
+    /*static final int hash(Object key) {
         int h;
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
-    }
+    }*/
 
     // по данным значениям создаться  new Entry(hash, key, value, null);
 }

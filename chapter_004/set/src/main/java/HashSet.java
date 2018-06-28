@@ -15,10 +15,10 @@ import java.util.NoSuchElementException;
 public class HashSet<E> implements Iterable<E> {
 
     private int modCount = 0;
-    private int hashCAPACITY = 12;
+    private int capacity = 12;
     private int countInsert = 0;
 
-    Object[] objects = new Object[hashCAPACITY];
+    private Object[] objects = new Object[capacity];
 
     /**
      * Чтобы найти место объекта в таблице, вычисляется
@@ -28,8 +28,8 @@ public class HashSet<E> implements Iterable<E> {
      */
     public boolean add(E e) {
         checkCapacity();
-        objects[Math.abs(e.hashCode() % hashCAPACITY)] = e;
-        countInsert++;
+        this.objects[Math.abs(e.hashCode() % capacity)] = e;
+        this.countInsert++;
         return true;
     }
 
@@ -39,7 +39,7 @@ public class HashSet<E> implements Iterable<E> {
      * @return
      */
     public boolean contains(E e) {
-        return objects[Math.abs(e.hashCode() % hashCAPACITY)] != null && objects[Math.abs(e.hashCode() % hashCAPACITY)].equals(e);
+        return this.objects[Math.abs(e.hashCode() % this.capacity)] != null && this.objects[Math.abs(e.hashCode() % this.capacity)].equals(e);
     }
 
     /**
@@ -49,7 +49,7 @@ public class HashSet<E> implements Iterable<E> {
     public boolean remove(E e) {
         boolean result = false;
         if (contains(e)) {
-            objects[Math.abs(e.hashCode() % hashCAPACITY)] = null;
+            this.objects[Math.abs(e.hashCode() % this.capacity)] = null;
             result = true;
         }
         return result;
@@ -59,16 +59,16 @@ public class HashSet<E> implements Iterable<E> {
      * Предусматриваем возможность роста хэш-таблицы при нехватке места для нового элемента.
      */
     private void checkCapacity() {
-        if (countInsert >= hashCAPACITY * 0.75) {
-            hashCAPACITY *= 2;
-            Object[] second = new Object[hashCAPACITY];
+        if (this.countInsert >= this.capacity * 0.75) {
+            this.capacity *= 2;
+            Object[] second = new Object[capacity];
             Iterator iterator = iterator();
             //перехеширование элементов
             while (iterator.hasNext()) {
                 E value = (E) iterator.next();
-                second[Math.abs(value.hashCode() % hashCAPACITY)] = value;
+                second[Math.abs(value.hashCode() % this.capacity)] = value;
             }
-            objects = Arrays.copyOf(second, hashCAPACITY);
+            this.objects = Arrays.copyOf(second, this.capacity);
         }
     }
 
@@ -77,14 +77,14 @@ public class HashSet<E> implements Iterable<E> {
     public Iterator<E> iterator() {
         Iterator<E> iterator = new Iterator<E>() {
 
-            int expectedModCount = modCount;
+            private int expectedModCount = modCount;
             private int count = 0;
 
             public boolean hasNext() {
                 checkConcurrent();
                 boolean result = false;
-                int i = count;
-                while (i < hashCAPACITY) {
+                int i = this.count;
+                while (i < capacity) {
                     if (objects[i] != null) {
                         result = true;
                         break;
@@ -105,7 +105,7 @@ public class HashSet<E> implements Iterable<E> {
 
             public void remove() {
                 checkConcurrent();
-                if (count > hashCAPACITY || count < 0) {
+                if (count > capacity || count < 0) {
                     throw new IndexOutOfBoundsException();
                 }
                 objects[count] = null;

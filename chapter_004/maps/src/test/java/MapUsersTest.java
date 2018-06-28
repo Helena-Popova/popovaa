@@ -17,7 +17,8 @@ public class MapUsersTest {
                 Calendar.DECEMBER, 31);
         System.out.println(new JSONObject(mapUsers.addUsers(
                 new User("Alex", 3, calendar),
-                new User("Alex", 3, calendar)))
+                new User("Alex", 3, calendar),
+                new User("Jon", 5, calendar)))
                 .toString());
     }
 }
