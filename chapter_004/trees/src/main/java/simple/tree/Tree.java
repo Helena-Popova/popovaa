@@ -1,6 +1,7 @@
 package simple.tree;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Создать элементарную структуру дерева [#1711]
@@ -8,7 +9,7 @@ import java.util.*;
  * @param <E>
  */
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
-    private Node<E> root = null;
+    private Node<E> root;
 
     /**
      * Ищем parent в дереве. если root == null добавляем его как root,
@@ -47,20 +48,20 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public Optional<Node<E>> findBy(E value) {
 
-        Optional<Node<E>> rsl = Optional.empty();
+        Optional<Node<E>> result = Optional.empty();
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
             if (el.eqValue(value)) {
-                rsl = Optional.of(el);
+                result = Optional.of(el);
                 break;
             }
             for (Node<E> child : el.leaves()) {
                 data.offer(child);
             }
         }
-        return rsl;
+        return result;
     }
 
 
@@ -77,35 +78,38 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                 finish = target.size();
             }
 
+            /**
+             * callMove вызывается тут так же , так как при count == finish
+             * ( элемента target.get(count) не существует) это означает.что нужно опять взять всех детей
+             * из списка родителей target по которому мы уже прошлись и перезаписать в target всех детей;
+             * если не будет этой проверки,то при первом  же count == finish это в корне когда count = finish = 1
+             * при вызове hasNext мы получим false, даже если дети у root есть
+             * @return
+             */
             public boolean hasNext() {
                 if (count == finish) {
                     count = 0;
-                    target = callMove(target);
+                    callMove();
                 }
                 return  count < finish;
             }
 
             public E next() {
                 if (finish == 0) {
-                    throw new NullPointerException();
+                    throw new NoSuchElementException();
                 }
                 if (count == finish) {
                     count = 0;
-                    target = callMove(target);
+                    callMove();
                 }
                 return target.get(count++).getValue();
             }
 
-            private List<Node<E>> callMove(List<Node<E>> list) {
-                List<Node<E>> move = new ArrayList<>();
-                for (Node<E> step : target) {
-                    if (step.leaves().size() != 0) {
-                        move.addAll(step.leaves());
-                    }
-                }
-                finish = move.size();
-                return move;
+            private void callMove() {
+                target = target.stream().filter(element -> element.leaves().size() != 0).map(parent -> parent.leaves()).flatMap(children -> children.stream()).collect(Collectors.toList());
+                finish = target.size();
             }
+
 
 
         };
