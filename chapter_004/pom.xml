@@ -17,6 +17,7 @@
         <module>lists</module>
         <module>set</module>
         <module>maps</module>
+        <module>trees</module>
     </modules>
 
 
