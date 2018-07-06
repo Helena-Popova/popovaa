@@ -18,6 +18,7 @@
         <module>set</module>
         <module>maps</module>
         <module>trees</module>
+        <module>trading</module>
     </modules>
 
 
