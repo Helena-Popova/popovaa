@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author HelenaPopova
  *
- * User в отдельном классе,потому что так удобнее 
+ * User в отдельном классе,потому что так удобнее
  */
 public class Store {
 

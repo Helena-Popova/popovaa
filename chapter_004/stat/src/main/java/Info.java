@@ -1,3 +1,7 @@
+
+import lombok.*;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,16 +9,24 @@ public class Info {
     /**
      * Сколько добавлено новых.
      */
+    @Getter
     private  Long numberNew;
     /**
      * Сколько изменено. Изменено считается объект в котором изменилось имя. а id осталось одинаковым.
      */
+    @Getter
     private  Long numberAdded;
     /**
      * Сколько удалено.
      */
+    @Getter
     private Long numberDeleted;
+
+    @Getter
+    @Setter
     private List<User> previoues;
+    @Getter
+    @Setter
     private List<User> current;
 
     public Info(List<User> srcPrevioues, List<User> srcCurrent) {
@@ -30,17 +42,5 @@ public class Info {
                 .count();
         numberDeleted = previoues.stream().filter(element -> !current.contains(element)).count();
         return this;
-    }
-
-    public int getNumberNew() {
-        return numberNew.intValue();
-    }
-
-    public int getNumberAdded() {
-        return numberAdded.intValue();
-    }
-
-    public int getNumberDeleted() {
-        return numberDeleted.intValue();
     }
 }

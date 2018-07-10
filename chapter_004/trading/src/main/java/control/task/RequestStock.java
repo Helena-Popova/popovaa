@@ -2,21 +2,40 @@ package control.task;
 
 import control.task.base.classes.ActionRequest;
 import control.task.base.classes.TypeRequest;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
+@EqualsAndHashCode
 public class RequestStock implements Comparable<RequestStock> {
 
+    @Getter
+    @Setter
+    @EqualsAndHashCode.Exclude
     private int id;
 
+    @Getter
+    @Setter
     private String book;
 
+    @Getter
+    @Setter
+    @EqualsAndHashCode.Exclude
     private TypeRequest type;
 
+    @Getter
+    @Setter
     private ActionRequest action;
 
+    @Getter
+    @Setter
     private int price;
 
+    @Getter
+    @Setter
+    @EqualsAndHashCode.Exclude
     private int volume;
 
     public RequestStock(int id, String book, TypeRequest type, ActionRequest action, int price, int volume) {
@@ -42,61 +61,6 @@ public class RequestStock implements Comparable<RequestStock> {
     }
 
 
-    public int getId() {
-        return this.id;
-    }
-
-
-    public void setId(int sId) {
-        this.id = sId;
-    }
-
-    public String getBook() {
-        return this.book;
-    }
-
-    public void setBook(String sBook) {
-        this.book = sBook;
-    }
-
-    public TypeRequest getType() {
-        return this.type;
-    }
-
-
-    public void setType(TypeRequest sType) {
-        this.type = sType;
-    }
-
-
-    public ActionRequest getAction() {
-        return this.action;
-    }
-
-
-    public void setAction(ActionRequest sAction) {
-        this.action = sAction;
-    }
-
-
-    public int getPrice() {
-        return this.price;
-    }
-
-
-    public void setPrice(int sPrice) {
-        this.price = sPrice;
-    }
-
-
-    public int getVolume() {
-        return this.volume;
-    }
-
-
-    public void setVolume(int sVolume) {
-        this.volume = sVolume;
-    }
 
     /**
      * для коллектировки колличества
@@ -111,31 +75,6 @@ public class RequestStock implements Comparable<RequestStock> {
         return true;
     }
 
-    /**
-     * заявки одинаковые,только если они одинаковы по цене,
-     * владельцу
-     * @param o
-     * @return
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        RequestStock that = (RequestStock) o;
-        return price == that.price
-                && Objects.equals(book, that.book)
-                && action == that.action;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(book, action, price);
-    }
 
     @Override
     public int compareTo(RequestStock o) {

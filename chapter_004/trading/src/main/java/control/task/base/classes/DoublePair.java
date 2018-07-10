@@ -1,6 +1,8 @@
 package control.task.base.classes;
 
 import control.task.RequestStock;
+import lombok.EqualsAndHashCode;
+
 import java.util.Objects;
 
 /**
@@ -8,10 +10,15 @@ import java.util.Objects;
  *  private RequestStock bit - заявки на продажу
  *  private RequestStock ask - заявки на покупку
  */
-
+@EqualsAndHashCode
 public class DoublePair {
+
+    @EqualsAndHashCode.Exclude
     private RequestStock bit;
+
+    @EqualsAndHashCode.Exclude
     private RequestStock ask;
+
     private int id;
 
     /**
@@ -114,23 +121,6 @@ public class DoublePair {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        DoublePair that = (DoublePair) o;
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id);
-    }
 
     @Override
     public String toString() {

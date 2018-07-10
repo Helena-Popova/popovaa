@@ -2,6 +2,9 @@ package control.task;
 
 import control.task.base.classes.DoublePair;
 import control.task.base.classes.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.*;
 
@@ -9,8 +12,13 @@ import java.util.*;
  * биржевой стакан
  * @author Helena
  */
+@EqualsAndHashCode
 public class GlassStock implements Comparable<GlassStock> {
+    @EqualsAndHashCode.Exclude
     private Map<Integer, List<DoublePair>> requests = new TreeMap<>();
+
+    @Getter
+    @Setter
     private String issuer;
 
     /**
@@ -37,11 +45,9 @@ public class GlassStock implements Comparable<GlassStock> {
         RequestStock elementAdd = sRequest.getType().equals(TypeRequest.ADD) ? recombinationAct(sRequest) : sRequest;
         if (requests.containsKey(elementAdd.getPrice())) {
             if (requests.get(elementAdd.getPrice()).contains(new DoublePair(elementAdd))) {
-                result = requests.get(elementAdd.getPrice()).stream()
+                requests.get(elementAdd.getPrice()).stream()
                         .filter(pair -> pair.getId() == elementAdd.getId())
-                        .findFirst()
-                        .get()
-                        .addInfoNewReq(elementAdd);
+                        .forEach(element -> element.addInfoNewReq(elementAdd));
             } else if (sRequest.getType().equals(TypeRequest.ADD)) {
                 Set<DoublePair> pairs = new HashSet<>(requests.get(elementAdd.getPrice()));
                 pairs.add(new DoublePair(elementAdd));
@@ -99,36 +105,6 @@ public class GlassStock implements Comparable<GlassStock> {
         return requests.get(price).stream().mapToInt(step -> step.getVolumBit()).sum();
     }
 
-    public String getIssuer() {
-        return issuer;
-    }
-
-    public void setIssuer(String issuer) {
-        this.issuer = issuer;
-    }
-
-    /**
-     * стаканы равны, если их эммитенты равны
-     * @param o
-     * @return
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        GlassStock that = (GlassStock) o;
-        return Objects.equals(issuer, that.issuer);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(issuer);
-    }
 
     /**
      * Для данного стакана формируется строка с последовательным указанием всех заявок, укорядоченных по убыванию цены
