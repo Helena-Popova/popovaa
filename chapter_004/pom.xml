@@ -20,6 +20,8 @@
         <module>trees</module>
         <module>trading</module>
         <module>stat</module>
+        <module>controlltask</module>
+        <module>piterservise</module>
     </modules>
 
     <dependencies>
