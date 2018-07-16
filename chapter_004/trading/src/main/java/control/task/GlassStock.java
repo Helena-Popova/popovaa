@@ -45,9 +45,11 @@ public class GlassStock implements Comparable<GlassStock> {
         RequestStock elementAdd = sRequest.getType().equals(TypeRequest.ADD) ? recombinationAct(sRequest) : sRequest;
         if (requests.containsKey(elementAdd.getPrice())) {
             if (requests.get(elementAdd.getPrice()).contains(new DoublePair(elementAdd))) {
+                List<Boolean> list = new ArrayList<>();
                 requests.get(elementAdd.getPrice()).stream()
                         .filter(pair -> pair.getId() == elementAdd.getId())
-                        .forEach(element -> element.addInfoNewReq(elementAdd));
+                        .findFirst().ifPresent(element -> list.add(element.addInfoNewReq(sRequest)));
+                result = list.size() > 0 ? list.get(list.size() - 1) : false;
             } else if (sRequest.getType().equals(TypeRequest.ADD)) {
                 Set<DoublePair> pairs = new HashSet<>(requests.get(elementAdd.getPrice()));
                 pairs.add(new DoublePair(elementAdd));
@@ -71,16 +73,13 @@ public class GlassStock implements Comparable<GlassStock> {
         List<DoublePair> temp;
         int sub = sRequest.getVolume();
         Iterator<Integer> iterator = requests.keySet().iterator();
-        LabelOne: while (iterator.hasNext()) {
+        while (iterator.hasNext()) {
             int price = iterator.next();
             temp = requests.get(price);
             if (temp != null) {
-                for (int i = 0; i < temp.size(); i++) {
+                for (int i = 0; i < temp.size() && (sub != 0 || price <= sRequest.getPrice()); i++) {
                     sub = temp.get(i).recombinatio(sRequest.getAction(), sub);
                     sRequest.addVolume(-sRequest.getVolume() - sub);
-                    if (sub == 0 || price > sRequest.getPrice()) {
-                        break LabelOne;
-                    }
                 }
             }
         }
