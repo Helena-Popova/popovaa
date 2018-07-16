@@ -1,14 +1,20 @@
 package lists;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
+@ThreadSafe
 public class DinamicLinkedList<E> implements Iterable<E> {
 
+    @GuardedBy("monitor")
     private Node<E> first;
+    @GuardedBy("monitor")
     int modCount = 0;
+    @GuardedBy("monitor")
     int size = 0;
 
     public static class Node<E> {
@@ -28,7 +34,7 @@ public class DinamicLinkedList<E> implements Iterable<E> {
         }
     }
 
-    public void add(E value) {
+    public synchronized void add(E value) {
         Node<E> newLink = new Node<E>(value);
         if (this.first == null) {
             this.first = newLink;
@@ -40,7 +46,7 @@ public class DinamicLinkedList<E> implements Iterable<E> {
         size++;
     }
 
-    public E get(int index) {
+    public synchronized E get(int index) {
         checkIndex(index);
 
         Node<E> result = this.first;
@@ -52,7 +58,7 @@ public class DinamicLinkedList<E> implements Iterable<E> {
         return result.date;
     }
 
-    public E remove(int index) {
+    public synchronized E remove(int index) {
         checkIndex(index);
 
         int step = size - 1;
@@ -66,7 +72,7 @@ public class DinamicLinkedList<E> implements Iterable<E> {
         return result.date;
     }
 
-    public int getSize() {
+    public synchronized int getSize() {
         return size;
     }
 
@@ -74,7 +80,7 @@ public class DinamicLinkedList<E> implements Iterable<E> {
      * замена ссылок при удалении элемента
      * @param ref
      */
-    private void replaseReference(Node<E> ref) {
+    private synchronized void replaseReference(Node<E> ref) {
         if (ref.next != null) {
             ref.next.previous = ref.previous;
         }
@@ -85,7 +91,7 @@ public class DinamicLinkedList<E> implements Iterable<E> {
         }
     }
 
-    private void checkIndex(int srcIndex) {
+    private synchronized void checkIndex(int srcIndex) {
         if (srcIndex >= size) {
             throw new IndexOutOfBoundsException();
         }
