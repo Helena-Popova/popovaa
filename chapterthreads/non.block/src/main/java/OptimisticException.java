@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
-
-public class OptimisticException {
+public class OptimisticException extends RuntimeException {
+    public OptimisticException(String msg) {
+        super(msg);
+    }
 }
