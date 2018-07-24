@@ -13,6 +13,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>whait.chapter</module>
+        <module>thread.pool</module>
+        <module>lock.example</module>
+        <module>searchengine</module>
+        <module>problem.thread</module>
+        <module>non.block</module>
     </modules>
 
     <dependencies>
