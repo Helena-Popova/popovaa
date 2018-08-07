@@ -17,12 +17,11 @@ public class NonBlockCache implements Cache {
     @Override
     public void update(Base model) {
         this.cache.computeIfPresent(model.getId(), (id, obj) -> {
-            if (obj.getVersion() == model.getVersion()) {
-                model.update();
-                return model;
-            } else {
+            if (obj.getVersion() != model.getVersion()) {
                 throw new OptimisticException("Erasing data");
             }
+            model.update();
+            return model;
         });
     }
 
