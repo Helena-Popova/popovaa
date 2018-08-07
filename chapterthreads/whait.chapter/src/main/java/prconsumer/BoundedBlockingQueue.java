@@ -30,7 +30,6 @@ public class BoundedBlockingQueue<T> {
     private Queue<T> queue = new LinkedList<>();
 
     @GuardedBy("this")
-    @Getter
     private int size;
 
     public BoundedBlockingQueue(int sizeUser) {
@@ -61,7 +60,7 @@ public class BoundedBlockingQueue<T> {
     public T poll() throws InterruptedException {
         T result;
         synchronized (queue) {
-            while (this.queue.size() == 0) {
+            while (this.queue.isEmpty()) {
                 this.queue.wait();
             }
             result = queue.poll();
