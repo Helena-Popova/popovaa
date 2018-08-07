@@ -1,6 +1,7 @@
 package task.two.one;
 
 import lombok.Getter;
+import lombok.Synchronized;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
@@ -8,7 +9,6 @@ import java.util.HashMap;
 
 @ThreadSafe
 public class Storage implements UserStorage {
-    @Getter
     @GuardedBy("users")
     HashMap<Integer, User> users = new HashMap<>();
 
@@ -60,5 +60,11 @@ public class Storage implements UserStorage {
             }
         }
         return result;
+    }
+
+    public HashMap<Integer, User> getUsers() {
+        synchronized (users){
+            return users;
+        }
     }
 }
