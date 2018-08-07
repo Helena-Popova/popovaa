@@ -10,7 +10,7 @@ import java.nio.CharBuffer;
 @Data
 public class SearchAppearances {
 
-    HashMap<String, Set<Integer>> appearanes = new HashMap<>();
+    TreeMap<String, Set<Integer>> appearanes = new TreeMap<>();
 
     /**
      * Загрузка данных из файла и построение индекса.
@@ -31,8 +31,7 @@ public class SearchAppearances {
             reader.close();
             toMap(buf);
         } catch (IOException ex) {
-
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
@@ -61,6 +60,7 @@ public class SearchAppearances {
                 stringBuilder.setLength(0);
             } else {
                 stringBuilder.append((char) alfa);
+
             }
             count.set(0, count.get(0) + 1);
         });
@@ -73,6 +73,9 @@ public class SearchAppearances {
      * @return
      */
     public Set<Integer> getIndexes4Word(String searchWord) {
-        return appearanes.containsKey(searchWord.toLowerCase()) ? appearanes.get(searchWord.toLowerCase()) : null;
+        Set<Integer> result = new TreeSet<>();
+        appearanes.entrySet().stream().filter(enty -> enty.getKey().contains(searchWord.toLowerCase())
+        ).forEach(state -> result.addAll(state.getValue()));
+        return !result.isEmpty() ? result : null;
     }
 }
