@@ -1,6 +1,12 @@
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.Calendar;
 import java.util.Objects;
 
+
+@ToString(of = {"name", "children", "birthday"})
+@EqualsAndHashCode(of = {"name", "children", "birthday"})
 public class User {
     private String name;
     private int children;
