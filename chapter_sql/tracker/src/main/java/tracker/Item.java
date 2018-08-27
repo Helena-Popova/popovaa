@@ -1,6 +1,7 @@
 package tracker;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
 * Класс реализации описания заявки
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 */
 public class Item {
 	
-	private String id;
+	private int id;
 	private String name;
 	private String desc;
 	private long created;
@@ -34,11 +35,23 @@ public class Item {
 		this.desc = desc;
 		this.created = created;
 	}
-	
-	public void setId(String aId) {
-		this.id = aId;
+
+	public Item(int id, String name, String desc, long created) {
+		this.id = id;
+		this.name = name;
+		this.desc = desc;
+		this.created = created;
 	}
-	
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public void setName(String aName) {
 		this.name = aName;
 	}
@@ -54,11 +67,7 @@ public class Item {
 	public void setCreated(long aCreated) {
 		this.created = aCreated;
 	}
-	
-	public String getId() {
-		return this.id;
-	}
-	
+
 	public String getName() {
 		return this.name;
 	}
@@ -76,8 +85,22 @@ public class Item {
 		return this.created;
 	}
 
-	public boolean compareId(String id) {
-		return this.getId().equals(id);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+        	return true;
+		}
+        if (o == null || getClass() != o.getClass()) {
+        	return false;
+		}
+        Item item = (Item) o;
+        return created == item.created
+				&& Objects.equals(name, item.name)
+				&& Objects.equals(desc, item.desc);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, desc, created);
+    }
 }

@@ -1,4 +1,4 @@
-package ru.job4j.tracker;
+package tracker;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class ValidateInputTest {
     private final ByteArrayOutputStream mem = new ByteArrayOutputStream();

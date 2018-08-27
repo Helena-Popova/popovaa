@@ -97,7 +97,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             int count = 1;
-            ArrayList<Item> items = tracker.getAll();
+            ArrayList<Item> items = tracker.findAll();
             System.out.println("Все сущестующие заявки :");
 
             for (Item i : items) {
@@ -119,12 +119,11 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, enter the task id which you want to replace : ");
-            if (!tracker.findById(id).equals(Item.EMPTY)) {
+            if (!tracker.findById(Integer.parseInt(id)).equals(Item.EMPTY)) {
                 String name = input.ask("Please, enter  the new task name : ");
                 String desc = input.ask("Please, enter  the new description : ");
                 Item item = new Item(name, desc);
-                item.setId(id);
-                tracker.replace(id, item);
+                tracker.replace(Integer.parseInt(id), item);
                 System.out.println("Item replaced");
             } else {
                 System.out.println(" Sorry,such a item is not existed");
@@ -142,8 +141,8 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, enter  the id Item those you want delete : ");
-            if (!tracker.findById(id).equals(Item.EMPTY)) {
-                tracker.delete(id);
+            if (!tracker.findById(Integer.parseInt(id)).equals(Item.EMPTY)) {
+                tracker.delete(Integer.parseInt(id));
                 System.out.println("Item deleted");
             } else {
                 System.out.println("Such a item is not existed with this id");
@@ -160,8 +159,8 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, enter  the id Item those you want find : ");
-            if (!tracker.findById(id).equals(Item.EMPTY)) {
-                Item temp = tracker.findById(id);
+            if (!tracker.findById(Integer.parseInt(id)).equals(Item.EMPTY)) {
+                Item temp = tracker.findById(Integer.parseInt(id));
                 System.out.println("id : " + temp.getId() + " Name : " + temp.getName() + " Description: " + temp.getDescription());
             } else {
                 System.out.println("Заявки нет, к сожалению");
