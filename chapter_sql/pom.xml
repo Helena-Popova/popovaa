@@ -16,6 +16,7 @@
         <module>optmization</module>
         <module>select</module>
         <module>parser</module>
+        <module>pars.vac</module>
     </modules>
 
     <dependencies>
