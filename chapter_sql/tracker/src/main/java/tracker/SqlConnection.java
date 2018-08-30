@@ -3,6 +3,16 @@ package tracker;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Возьми класс Tracker  2. Реализовать класс Tracker [#396] и расширьте для него интерфейс
+ * AutoCloseable
+ * Необходимо заменить в классе Tracker хранение данных из массива в базу данных.
+ * Настройки подключение базы данных и скрипты должны находиться в отдельном файле и считываться при старте.
+ * Предусмотреть возможность, что структуры в базе еще нет. И вам нужно ее создать при старте.
+ * Все ресурсы необходимо закрывай через try-with-resources
+ * В классе трекер появляется новое поле private Connection connection. Его нужно закрывать через AutoCloseable.
+ */
+
 public class SqlConnection {
     private Connection conn;
 
