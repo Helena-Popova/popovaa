@@ -119,7 +119,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, enter the task id which you want to replace : ");
-            if (!tracker.findById(Integer.parseInt(id)).equals(Item.EMPTY)) {
+            if (id != null && !tracker.findById(Integer.parseInt(id)).equals(Item.EMPTY)) {
                 String name = input.ask("Please, enter  the new task name : ");
                 String desc = input.ask("Please, enter  the new description : ");
                 Item item = new Item(name, desc);
@@ -141,7 +141,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, enter  the id Item those you want delete : ");
-            if (!tracker.findById(Integer.parseInt(id)).equals(Item.EMPTY)) {
+            if (id != null && !tracker.findById(Integer.parseInt(id)).equals(Item.EMPTY)) {
                 tracker.delete(Integer.parseInt(id));
                 System.out.println("Item deleted");
             } else {
@@ -159,7 +159,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, enter  the id Item those you want find : ");
-            if (!tracker.findById(Integer.parseInt(id)).equals(Item.EMPTY)) {
+            if (id != null && !tracker.findById(Integer.parseInt(id)).equals(Item.EMPTY)) {
                 Item temp = tracker.findById(Integer.parseInt(id));
                 System.out.println("id : " + temp.getId() + " Name : " + temp.getName() + " Description: " + temp.getDescription());
             } else {
@@ -178,7 +178,7 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Please, enter  the name Item those you want find : ");
-            if (tracker.findByName(name).size() != 0) {
+            if (name != null && tracker.findByName(name).size() != 0) {
                 System.out.println("I find! : ");
                 for (Item task : tracker.findByName(name)) {
                     System.out.println("id : " + task.getId() + " Name : " + task.getName() + " Description: " + task.getDescription());

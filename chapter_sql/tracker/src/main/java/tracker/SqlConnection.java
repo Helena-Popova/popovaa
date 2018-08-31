@@ -1,5 +1,8 @@
 package tracker;
 
+
+import org.apache.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -15,11 +18,12 @@ import java.util.ArrayList;
 
 public class SqlConnection {
     private Connection conn;
+    String url = "jdbc:postgresql://localhost/tracker?user=postgres&password=root";
+    final static Logger LOGGER = Logger.getLogger(SqlConnection.class);
 
     public SqlConnection() {
-        getConnection();
         PreparedStatement st = null;
-        try {
+        try (Connection conn = DriverManager.getConnection(url)) {
             st = conn.prepareStatement("CREATE TABLE if not EXISTS comments ( "
                     + " id serial NOT NULL,"
                     + "  description character varying(2000),"
@@ -34,20 +38,9 @@ public class SqlConnection {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            close(st);
         }
     }
 
-
-    private void getConnection() {
-        String url = "jdbc:postgresql://localhost/tracker?user=postgres&password=root";
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void closeConnection() {
         if (conn != null) {
@@ -60,23 +53,24 @@ public class SqlConnection {
     }
 
     public int addItem(Item item) {
-        getConnection();
         PreparedStatement st = null;
-        try {
+        try (Connection conn = DriverManager.getConnection(url)) {
             st = conn.prepareStatement("insert into item(name, description, created)"
                     + " values(?,?,?)", Statement.RETURN_GENERATED_KEYS);
             st.setString(1, item.getName());
             st.setString(2, item.getDescription());
             st.setLong(3, item.getCreated());
             st.executeUpdate();
-            ResultSet rs = st.getGeneratedKeys();
-            while (rs.next()) {
-                return rs.getInt(1);
+
+            try (ResultSet rs = st.getGeneratedKeys()) {
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            close(st);
         }
         throw new IllegalStateException("Could not create nem item");
     }
@@ -87,20 +81,18 @@ public class SqlConnection {
      * @param id
      */
     public int delete(int id) {
-        getConnection();
-        PreparedStatement st = null;
-        try {
-            st = conn.prepareStatement("delete from item  where id = ?", Statement.RETURN_GENERATED_KEYS);
+        try (Connection conn = DriverManager.getConnection(url); PreparedStatement st = conn.prepareStatement("delete from item  where id = ?", Statement.RETURN_GENERATED_KEYS)) {
             st.setInt(1, id);
             st.executeUpdate();
-            ResultSet rs = st.getGeneratedKeys();
-            while (rs.next()) {
-                return rs.getInt(1);
+            try (ResultSet rs = st.getGeneratedKeys()) {
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            close(st);
         }
         throw new IllegalStateException("Could not delete item");
     }
@@ -112,11 +104,8 @@ public class SqlConnection {
      */
     public ArrayList<Item> findAll() {
         ArrayList<Item> itemsCopy = new ArrayList<>();
-        getConnection();
-        PreparedStatement st = null;
-        try {
-            st = conn.prepareStatement("select * from item");
-            ResultSet rs = st.executeQuery();
+        try (Connection conn = DriverManager.getConnection(url); PreparedStatement  st = conn.prepareStatement("select * from item");
+            ResultSet rs = st.executeQuery()) {
             while (rs.next()) {
                 itemsCopy.add(new Item(rs.getInt("id"), rs.getString("name"),
                         rs.getString("description"), rs.getLong("created")));
@@ -124,8 +113,6 @@ public class SqlConnection {
             return itemsCopy;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            close(st);
         }
         throw new IllegalStateException("Could not find all item");
     }
@@ -139,21 +126,19 @@ public class SqlConnection {
      */
     public ArrayList<Item> findByName(String key) {
         ArrayList<Item> itemsCopy = new ArrayList<>();
-        getConnection();
-        PreparedStatement st = null;
-        try {
-            st = conn.prepareStatement("Select * from item where name = ?");
+        try (Connection conn = DriverManager.getConnection(url); PreparedStatement  st = conn.prepareStatement("Select * from item where name = ?")) {
             st.setString(1, key);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                itemsCopy.add(new Item(rs.getInt("id"), rs.getString("name"),
-                        rs.getString("description"), rs.getLong("created")));
+            try (ResultSet rs = st.executeQuery();) {
+                while (rs.next()) {
+                    itemsCopy.add(new Item(rs.getInt("id"), rs.getString("name"),
+                            rs.getString("description"), rs.getLong("created")));
+                }
+                return itemsCopy;
+            } catch (SQLException e) {
+                printLog(String.format("%s %s", e.getSQLState(), e.getMessage()));
             }
-            return itemsCopy;
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(st);
+            printLog(String.format("%s %s", e.getSQLState(), e.getMessage()));
         }
         throw new IllegalStateException("Could not find by name item");
     }
@@ -165,59 +150,46 @@ public class SqlConnection {
      * @return Item
      */
     public Item findById(int id) {
-        getConnection();
-        PreparedStatement st = null;
-        try {
-            st = conn.prepareStatement("Select * from item where id = ?");
+        try (Connection conn = DriverManager.getConnection(url); PreparedStatement  st = conn.prepareStatement("Select * from item where id = ?")) {
             st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                return new Item(rs.getInt("id"), rs.getString("name"),
-                        rs.getString("description"), rs.getLong("created"));
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    return new Item(rs.getInt("id"), rs.getString("name"),
+                            rs.getString("description"), rs.getLong("created"));
+                }
+            } catch (SQLException e) {
+                printLog(String.format("%s %s", e.getSQLState(), e.getMessage()));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(st);
+            printLog(String.format("%s %s", e.getSQLState(), e.getMessage()));
         }
         throw new IllegalStateException("Could not find by id item");
     }
 
     public int replace(int id, Item item) {
-        getConnection();
-        PreparedStatement st = null;
-        try {
-            st = conn.prepareStatement("Update item set name = ? ,"
+        try (Connection conn = DriverManager.getConnection(url); PreparedStatement st = conn.prepareStatement("Update item set name = ? ,"
                     + "description = ?,"
                     + "created = ?"
-                    + " where id = ?", Statement.RETURN_GENERATED_KEYS);
+                    + " where id = ?", Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, item.getName());
             st.setString(2, item.getDescription());
             st.setLong(3, item.getCreated());
             st.setInt(4, id);
             st.executeUpdate();
-            ResultSet resultSet = st.getGeneratedKeys();
-            while (resultSet.next()) {
-                return resultSet.getInt(1);
+            try (ResultSet resultSet = st.getGeneratedKeys()) {
+                while (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            } catch (SQLException e) {
+                printLog(String.format("%s %s", e.getSQLState(), e.getMessage()));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(st);
+            printLog(String.format("%s %s", e.getSQLState(), e.getMessage()));
         }
         throw new IllegalStateException("Could not update item");
     }
 
-
-    private void close(PreparedStatement st) {
-        try {
-            if (st != null) {
-                st.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        closeConnection();
+    public void printLog(String parameter) {
+        LOGGER.warn("This is warn : " + parameter);
     }
-
 }

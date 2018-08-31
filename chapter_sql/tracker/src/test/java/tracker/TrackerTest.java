@@ -25,21 +25,22 @@ public class TrackerTest extends Item {
         Item first = new Item(2, "test1", "testDescription", 123L);
         Item second = new Item(3, "test2", "testDescription", 124L);
         tracker.add(first);
-        tracker.replace(tracker.findAll().get(1).getId(), second);
-        assertThat(tracker.findAll().get(1), is(second));
+        tracker.replace(tracker.findAll().get(0).getId(), second);
+        assertThat(tracker.findAll().get(0), is(second));
     }
 
     @Test
     public void whenDeletedItemThenTrackerLostOneItem() {
         Tracker tracker = new Tracker();
+        delete(tracker);
         Item first = new Item(4, "test1", "testDescription", 123L);
         Item second = new Item(5, "test2", "testDescription", 124L);
         Item third = new Item(6, "test3", "testDescription", 125L);
         tracker.add(first);
         tracker.add(second);
         tracker.add(third);
-        tracker.delete(tracker.findAll().get(3).getId());
-        assertThat(tracker.findAll().get(3), is(third));
+        tracker.delete(tracker.findAll().get(1).getId());
+        assertThat(tracker.findAll().get(1), is(third));
     }
 
 
